@@ -1,0 +1,24 @@
+{
+  "name": "geometry_marketplace",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gsnoopy/geometry_marketplace.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gsnoopy/geometry_marketplace/issues"
+  },
+  "homepage": "https://github.com/gsnoopy/geometry_marketplace#readme",
+  "dependencies": {
+    "discord.js": "^14.14.1",
+    "dotenv": "^16.3.2",
+    "pg": "^8.11.3"
+  }
+}
