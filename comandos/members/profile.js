@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const { getUserDatabase } = require('../../modules/getUserDatabase');
+const { getUserDatabase } = require('../../database/getUserDatabase');
 
 module.exports = {
   name: "perfil",
