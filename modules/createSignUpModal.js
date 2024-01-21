@@ -11,6 +11,11 @@ function createSignUpModal(interaction) {
             .setLabel("Nome completo")
             .setStyle(TextInputStyle.Short);
 
+        const emailInput = new TextInputBuilder()
+            .setCustomId('emailInput')
+            .setLabel("Digite um e-mail válido")
+            .setStyle(TextInputStyle.Short);
+
         const cpfInput = new TextInputBuilder()
             .setCustomId('cpfInput')
             .setLabel("CPF")
@@ -27,14 +32,16 @@ function createSignUpModal(interaction) {
             .setStyle(TextInputStyle.Short)
 
         const firstActionRow = new ActionRowBuilder().addComponents(nameInput);
-        const secondActionRow = new ActionRowBuilder().addComponents(cpfInput);
-        const thirdActionRow = new ActionRowBuilder().addComponents(pixInput);
-        const fourthActionRow = new ActionRowBuilder().addComponents(indicacaoInput);
+        const secondActionRow = new ActionRowBuilder().addComponents(emailInput);
+        const thirdActionRow = new ActionRowBuilder().addComponents(cpfInput);
+        const fourthActionRow = new ActionRowBuilder().addComponents(pixInput);
+        const fifthActionrRow = new ActionRowBuilder().addComponents(indicacaoInput);
 
         modal.addComponents(firstActionRow);
         modal.addComponents(secondActionRow);
         modal.addComponents(thirdActionRow);
         modal.addComponents(fourthActionRow);
+        modal.addComponents(fifthActionrRow);
 
         interaction.showModal(modal);
     }

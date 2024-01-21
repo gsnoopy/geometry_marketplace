@@ -17,8 +17,10 @@
   },
   "homepage": "https://github.com/gsnoopy/geometry_marketplace#readme",
   "dependencies": {
+    "axios": "^1.6.5",
     "discord.js": "^14.14.1",
     "dotenv": "^16.3.2",
-    "pg": "^8.11.3"
+    "pg": "^8.11.3",
+    "qrcode": "^1.5.3"
   }
 }

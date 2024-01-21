@@ -12,6 +12,12 @@ function createEditProfileModal(interaction) {
             .setStyle(TextInputStyle.Short)
             .setRequired(false);
 
+        const emailInput = new TextInputBuilder()
+            .setCustomId('emailInput')
+            .setLabel("Email")
+            .setStyle(TextInputStyle.Short)
+            .setRequired(false);
+
         const cpfInput = new TextInputBuilder()
             .setCustomId('cpfInput')
             .setLabel("CPF")
@@ -25,12 +31,14 @@ function createEditProfileModal(interaction) {
             .setRequired(false);
   
         const firstActionRow = new ActionRowBuilder().addComponents(nameInput);
-        const secondActionRow = new ActionRowBuilder().addComponents(cpfInput);
-        const thirdActionRow = new ActionRowBuilder().addComponents(pixInput);
+        const secondActionRow = new ActionRowBuilder().addComponents(emailInput);
+        const thirdActionRow = new ActionRowBuilder().addComponents(cpfInput);
+        const fourthActionrOW = new ActionRowBuilder().addComponents(pixInput);
 
         modal.addComponents(firstActionRow);
         modal.addComponents(secondActionRow);
         modal.addComponents(thirdActionRow);
+        modal.addComponents(fourthActionrOW);
 
         interaction.showModal(modal);
     }

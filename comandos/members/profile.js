@@ -18,6 +18,7 @@ module.exports = {
             const userDiscordName = interaction.user.tag
             const userAvatar = interaction.user.displayAvatarURL({ format: 'png', dynamic: true, size: 1024 }); 
             const userName = userData.name;
+            const userEmail = userData.email;
             const userCPF = userData.cpf;
             const userPIX = userData.pix;
             const userBalance = userData.saldo;
@@ -32,6 +33,7 @@ module.exports = {
                     { name: 'Nome:', value: userName},
                     { name: 'ID:', value: userId },
                     { name: 'CPF:', value: userCPF},
+                    { name: 'Email:', value: userEmail},
                     { name: 'Chave PIX:', value: userPIX},
                     { name: 'Saldo:', value: userBalance},
                     { name: 'Indicado por:', value: userInvitedBy},

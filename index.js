@@ -15,8 +15,11 @@ require('./handler')(client);
 const { createSignUpModal } = require('./modules/createSignUpModal');
 const { createEditProfileModal } = require('./modules/createEditProfileModal');
 const { createAdModal } = require('./modules/createAdModal');
+const { createSaldoModal } = require('./modules/createSaldoModal');
+
 const { submitSignUpModal } = require('./modules/submitSignUpModal');
 const { submitEditProfileModal } = require('./modules/submitEditProfileModal');
+const { submitSaldoModal } = require('./modules/submitSaldoModal');
 
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
@@ -37,11 +40,13 @@ client.on('interactionCreate', (interaction) => {
   if(interaction.isButton()){
     createSignUpModal(interaction);
     createEditProfileModal(interaction);
+    createSaldoModal(interaction)
   }
 
   if (interaction.isModalSubmit()){
     submitSignUpModal(interaction);
     submitEditProfileModal(interaction);
+    submitSaldoModal(interaction)
   }
 
   if (interaction.isStringSelectMenu()) {
