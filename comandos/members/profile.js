@@ -1,4 +1,5 @@
 const Discord = require("discord.js");
+const { getAdByUser } = require("../../database/getAdByUserDatabase");
 const { getUserDatabase } = require('../../database/getUserDatabase');
 
 module.exports = {
@@ -9,8 +10,11 @@ module.exports = {
   run: async (client, interaction) => {
 
     try {
+      
+        await interaction.deferReply({ ephemeral: true });
 
         const userData = await getUserDatabase(interaction.user.id);
+        const announcementsData = await getAdByUser(interaction.user.id);
 
         if (userData) {
 
@@ -39,16 +43,29 @@ module.exports = {
                     { name: 'Indicado por:', value: userInvitedBy},
                 )
                 .setTimestamp()
+
+                if (announcementsData.length > 0) {
+                  const announcementsField = {
+                    name: 'Anúncios ativos:',
+                    value: announcementsData.map(ad => `ID: ${ad.message_id} | Title: ${ad.title}`).join('\n'),
+                  };
+                  embed.addFields(announcementsField);
+                }
             
-            const button = new Discord.ActionRowBuilder().addComponents(
+            const buttons = new Discord.ActionRowBuilder().addComponents(
                 new Discord.ButtonBuilder()
                 .setCustomId("editProfile")
                 .setLabel("Editar perfil")
                 .setEmoji("⚙️")
                 .setStyle(Discord.ButtonStyle.Primary),
+                new Discord.ButtonBuilder()
+                .setCustomId("deleteAd")
+                .setLabel("Excluir um anúncio")
+                .setEmoji("⚙️")
+                .setStyle(Discord.ButtonStyle.Primary),
             );
             
-            await interaction.reply({ embeds: [embed], components: [button], ephemeral: true });
+            await interaction.editReply({ embeds: [embed], components: [buttons], ephemeral: true });
 
       } else {
 

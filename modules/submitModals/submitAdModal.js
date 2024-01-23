@@ -1,6 +1,7 @@
 const { Discord, ActionRowBuilder, ModalBuilder, TextInputBuilder, TextInputStyle } = require('../../imports');
+const { registerAdDatabase } = require('../../database/registerAdDatabase');
 
-async function submitAdModal(interaction, selectedOptions) {
+async function submitAdModal(interaction) {
 
   try {
     if (interaction.customId === 'adModal') {
@@ -40,9 +41,10 @@ async function submitAdModal(interaction, selectedOptions) {
         const value = interaction.fields.getTextInputValue('valueInput');
         const description = interaction.fields.getTextInputValue('descriptionInput');
         const link = interaction.fields.getTextInputValue('linkInput');
-        const data = interaction.fields.getTextInputValue('dataInput');
+        const data = interaction.fields.getTextInputValue('dataInput')
 
         const channel = interaction.guild.channels.cache.get(id_channel);
+        const user_id = interaction.user.id
         const userAvatar = interaction.user.displayAvatarURL({ format: 'png', dynamic: true, size: 1024 });
         const userDiscordName = interaction.user.tag
 
@@ -75,7 +77,10 @@ async function submitAdModal(interaction, selectedOptions) {
       );
 
       if (channel) {
-        await channel.send({ embeds: [embed], components: [buttons]});
+        const sentMessage = await channel.send({ embeds: [embed], components: [buttons]});
+        const messageId = sentMessage.id;
+        await registerAdDatabase(id_category,description,link,data,title,user_id,value, messageId)
+
       }
 
       interaction.editReply({ content: `Anúncio criado em ${id_channel}`, ephemeral: true })

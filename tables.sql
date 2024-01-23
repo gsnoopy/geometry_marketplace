@@ -14,15 +14,17 @@ CREATE TABLE anuncios (
     message_id NUMERIC,
     title VARCHAR(255) NOT NULL,
     value FLOAT NOT NULL,
-    description VARCHAR(255),
-    image VARCHAR(255),
-    information VARCHAR(255),
+    description TEXT,
+    image TEXT,
+    information TEXT,
+    criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     categoria_id INTEGER REFERENCES categorias(id)
 );
 
 CREATE TABLE categorias (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL
+    name VARCHAR(255) NOT NULL,
+    channel_id VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE transactions_saldo (
@@ -34,12 +36,12 @@ CREATE TABLE transactions_saldo (
     transaction_datetime TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO categorias (name) VALUES
-    ('league of legends'),
-    ('valorant'),
-    ('fortnite'),
-    ('steam'),
-    ('keys');
+INSERT INTO categorias (name, channel_id) VALUES
+  ('league of legends', '1198197653062811668'),
+  ('valorant', '1198197771904233534'),
+  ('fortnite', '1198197670850867290'),
+  ('steam', '1198197740526645248'),
+  ('keys', '1198197704862478336');
 
 DELETE FROM users
 WHERE user_id = 'id_do_usuario';

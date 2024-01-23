@@ -17,11 +17,16 @@ const { createSignUpModal } = require('./modules/createModals/createSignUpModal'
 const { createEditProfileModal } = require('./modules/createModals/createEditProfileModal');
 const { createAdModal } = require('./modules/createModals/createAdModal');
 const { createSaldoModal } = require('./modules/createModals/createSaldoModal');
+const { createDeleteAdModal } = require('./modules/createModals/createDeleteAdModal');
 
 const { submitSignUpModal } = require('./modules/submitModals/submitSignUpModal');
 const { submitEditProfileModal } = require('./modules/submitModals/submitEditProfileModal');
 const { submitSaldoModal } = require('./modules/submitModals/submitSaldoModal');
 const { submitAdModal } = require('./modules/submitModals/submitAdModal');
+const { submitDeleteAdModal } = require('./modules/submitModals/submitDeleteAdModal');
+
+const { seeProfile } = require('./modules/pressButtons/seeProfile');
+
 
 const { verifyPayment } = require('./scripts/verifyPayment');
 
@@ -52,6 +57,8 @@ client.on('interactionCreate', (interaction) => {
     createSignUpModal(interaction);
     createEditProfileModal(interaction);
     createSaldoModal(interaction);
+    createDeleteAdModal(interaction);
+    seeProfile(interaction)
   }
 
   if (interaction.isModalSubmit()){
@@ -59,6 +66,7 @@ client.on('interactionCreate', (interaction) => {
     submitEditProfileModal(interaction);
     submitSaldoModal(interaction);
     submitAdModal(interaction);
+    submitDeleteAdModal(interaction);
   }
 
     if (interaction.isStringSelectMenu()) {
