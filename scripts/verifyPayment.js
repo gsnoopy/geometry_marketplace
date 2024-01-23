@@ -1,5 +1,3 @@
-// verificarPagamentos.js
-
 const axios = require('axios');
 
 async function verifyPayment(db, client) {
@@ -9,30 +7,26 @@ async function verifyPayment(db, client) {
     for (const pagamento of result.rows) {
       const { mp_id, transaction_datetime, channel_id, transaction_amount, user_id } = pagamento;
 
-      // Verifica se o pagamento está aprovado
-      const isAprovado = await verifyApprovedPayment(mp_id);
+      const isApproved = await verifyApprovedPayment(mp_id);
 
-      if (isAprovado) {
-        // Atualiza saldo na tabela users
+      if (isApproved) {
+
         await db.query('UPDATE users SET saldo = saldo + $1 WHERE user_id = $2', [transaction_amount, user_id]);
 
-        // Obtém o canal no Discord
         const channel = client.channels.cache.get(channel_id);
 
-        // Envia uma mensagem informando que o pagamento foi aprovado e o canal será fechado em 70 segundos
         if (channel) {
-          await channel.send('Pagamento aprovado e saldo adicionado! Este canal será fechado em 70 segundos.');
+          await channel.send('Pagamento aprovado e saldo adicionado! Este canal será fechado em 3 minutos.');
         }
 
-        // Aguarda 70 segundos antes de excluir o canal
         setTimeout(async () => {
           if (channel) {
             await channel.delete();
           }
-        }, 70000); // 70 segundos em milissegundos
+        }, 180000); 
 
-        // Remove a transação da tabela transactions_saldo
         await db.query('DELETE FROM transactions_saldo WHERE mp_id = $1', [mp_id]);
+
       } else {
 
         const transactionDatetime = new Date(`${transaction_datetime} UTC`);
@@ -41,22 +35,18 @@ async function verifyPayment(db, client) {
         const diffInMinutes = Math.floor((dataAtual - transactionDatetime) / (1000 * 60));
         
         if (diffInMinutes >= 25) {
-          // Obtém o canal no Discord para enviar mensagem antes de excluir
-          const channel = client.channels.cache.get(channel_id);
 
-          // Envia mensagem informando que o pagamento expirou
+          const channel = client.channels.cache.get(channel_id);
           if (channel) {
             await channel.send('Pagamento expirado! Este canal será fechado em breve.');
           }
 
-          // Aguarda 5 segundos antes de excluir o canal
           setTimeout(async () => {
             if (channel) {
               await channel.delete();
             }
-          }, 5000); // 5 segundos em milissegundos
+          }, 5000);
 
-          // Remove a transação expirada da tabela transactions_saldo
           await db.query('DELETE FROM transactions_saldo WHERE mp_id = $1', [mp_id]);
         }
       }

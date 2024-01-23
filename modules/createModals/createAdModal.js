@@ -1,7 +1,10 @@
-const { ActionRowBuilder, ModalBuilder, TextInputBuilder, TextInputStyle } = require('../imports');
+const { ActionRowBuilder, ModalBuilder, TextInputBuilder, TextInputStyle } = require('../../imports');
 
 function createAdModal(interaction) {
     if (interaction.customId === 'ad_options') {
+
+        const selectedOptions = interaction.client.tempData?.adModalOptions || [];
+        
         const modal = new ModalBuilder()
             .setCustomId('adModal')
             .setTitle(`Criando o seu anúncio.`);

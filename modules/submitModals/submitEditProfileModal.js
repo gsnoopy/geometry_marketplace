@@ -1,4 +1,4 @@
-const { editUserDatabase } = require('../database/editUserDatabase');
+const { editUserDatabase } = require('../../database/editUserDatabase');
 
 async function submitEditProfileModal(interaction) {
 

@@ -1,4 +1,4 @@
-const { registerUserDatabase } = require('../database/registerUserDatabase');
+const { registerUserDatabase } = require('../../database/registerUserDatabase');
 
 async function submitSignUpModal(interaction) {
 

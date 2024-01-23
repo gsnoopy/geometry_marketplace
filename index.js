@@ -13,14 +13,15 @@ const client = new Client({
 client.slashCommands = new Discord.Collection();
 require('./handler')(client);
 
-const { createSignUpModal } = require('./modules/createSignUpModal');
-const { createEditProfileModal } = require('./modules/createEditProfileModal');
-const { createAdModal } = require('./modules/createAdModal');
-const { createSaldoModal } = require('./modules/createSaldoModal');
+const { createSignUpModal } = require('./modules/createModals/createSignUpModal');
+const { createEditProfileModal } = require('./modules/createModals/createEditProfileModal');
+const { createAdModal } = require('./modules/createModals/createAdModal');
+const { createSaldoModal } = require('./modules/createModals/createSaldoModal');
 
-const { submitSignUpModal } = require('./modules/submitSignUpModal');
-const { submitEditProfileModal } = require('./modules/submitEditProfileModal');
-const { submitSaldoModal } = require('./modules/submitSaldoModal');
+const { submitSignUpModal } = require('./modules/submitModals/submitSignUpModal');
+const { submitEditProfileModal } = require('./modules/submitModals/submitEditProfileModal');
+const { submitSaldoModal } = require('./modules/submitModals/submitSaldoModal');
+const { submitAdModal } = require('./modules/submitModals/submitAdModal');
 
 const { verifyPayment } = require('./scripts/verifyPayment');
 
@@ -30,7 +31,7 @@ client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
 
   setInterval(() => {
-    verifyPayment(db, client);
+    //verifyPayment(db, client);
   }, 7000);
 
 });
@@ -50,18 +51,22 @@ client.on('interactionCreate', (interaction) => {
   if(interaction.isButton()){
     createSignUpModal(interaction);
     createEditProfileModal(interaction);
-    createSaldoModal(interaction)
+    createSaldoModal(interaction);
   }
 
   if (interaction.isModalSubmit()){
     submitSignUpModal(interaction);
     submitEditProfileModal(interaction);
-    submitSaldoModal(interaction)
+    submitSaldoModal(interaction);
+    submitAdModal(interaction);
   }
 
-  if (interaction.isStringSelectMenu()) {
-    createAdModal(interaction);
-  }
+    if (interaction.isStringSelectMenu()) {
+
+      const selectedOptions = interaction.values;
+      interaction.client.tempData = { adModalOptions: selectedOptions }
+      createAdModal(interaction);
+    }
 
 });
 

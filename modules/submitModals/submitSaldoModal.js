@@ -2,9 +2,9 @@ const axios = require('axios');
 const qrcode = require('qrcode');
 const fs = require('fs');
 const { AttachmentBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const { Discord } = require('../imports');
-const { getUserDatabase } = require('../database/getUserDatabase');
-const { registerTransactionsDatabase } = require('../database/registerTransactionsDatabase');
+const { Discord } = require('../../imports');
+const { getUserDatabase } = require('../../database/getUserDatabase');
+const { registerTransactionsDatabase } = require('../../database/registerTransactionsDatabase');
 
 async function submitSaldoModal(interaction) {
   try {
