@@ -5,7 +5,6 @@ CREATE TABLE users (
   cpf VARCHAR(11) UNIQUE,
   pix VARCHAR(255),
   saldo DECIMAL(10, 2) DEFAULT 0.0,
-  saldo_restrito DECIMAL(10, 2) DEFAULT 0.0,
   cupom VARCHAR(255)
 );
 
@@ -26,12 +25,13 @@ CREATE TABLE categorias (
     name VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE transactions (
+CREATE TABLE transactions_saldo (
     transaction_id SERIAL PRIMARY KEY,
     user_id VARCHAR(255) NOT NULL,
     mp_id VARCHAR(255) NOT NULL,
     channel_id VARCHAR(255) NOT NULL,
-    transaction_amount FLOAT NOT NULL
+    transaction_amount FLOAT NOT NULL,
+    transaction_datetime TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 INSERT INTO categorias (name) VALUES

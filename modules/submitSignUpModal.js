@@ -12,10 +12,9 @@ async function submitSignUpModal(interaction) {
         const cupom = interaction.fields.getTextInputValue('indicacaoInput');
         const userID = interaction.user.id;
         const saldo = 0.0;
-        const saldoRestrito = 0.0;
 
         interaction.deferReply({ content: "Aguarde estamos realizando o seu cadastro", ephemeral: true }) 
-        await registerUserDatabase(name, email, cpf, pix, userID, saldo, saldoRestrito, cupom);
+        await registerUserDatabase(name, email, cpf, pix, userID, saldo, cupom);
         interaction.editReply({ content: "Usuário cadastrado!", ephemeral: true });
 
     }

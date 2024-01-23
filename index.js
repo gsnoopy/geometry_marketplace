@@ -1,4 +1,5 @@
 const { Discord, Client, GatewayIntentBits } = require('./imports');
+const db = require('./database');
 
 const client = new Client({
   intents: [
@@ -21,8 +22,17 @@ const { submitSignUpModal } = require('./modules/submitSignUpModal');
 const { submitEditProfileModal } = require('./modules/submitEditProfileModal');
 const { submitSaldoModal } = require('./modules/submitSaldoModal');
 
+const { verifyPayment } = require('./scripts/verifyPayment');
+
+
+
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
+
+  setInterval(() => {
+    verifyPayment(db, client);
+  }, 7000);
+
 });
 
 client.on('interactionCreate', (interaction) => {
