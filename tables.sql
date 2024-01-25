@@ -11,7 +11,7 @@ CREATE TABLE users (
 CREATE TABLE anuncios (
     anuncio_id SERIAL PRIMARY KEY,
     user_id VARCHAR(255) NOT NULL,
-    message_id NUMERIC,
+    message_id NUMERIC, 
     title VARCHAR(255) NOT NULL,
     value FLOAT NOT NULL,
     description TEXT,
@@ -36,6 +36,19 @@ CREATE TABLE transactions_saldo (
     transaction_datetime TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE transactions_anuncio (
+    transaction_id SERIAL PRIMARY KEY,
+    seller_id VARCHAR(255) NOT NULL,
+    buyer_id VARCHAR(255) NOT NULL,
+    saldo NUMERIC NOT NULL,
+    saldo_retido NUMERIC NOT NULL,
+    taxa NUMERIC NOT NULL,
+    data_hora TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    categoria_id INTEGER REFERENCES categorias(id),
+    anuncio_title VARCHAR(255) NOT NULL
+);
+
+
 INSERT INTO categorias (name, channel_id) VALUES
   ('league of legends', '1198197653062811668'),
   ('valorant', '1198197771904233534'),
@@ -45,3 +58,7 @@ INSERT INTO categorias (name, channel_id) VALUES
 
 DELETE FROM users
 WHERE user_id = 'id_do_usuario';
+
+UPDATE users
+SET saldo = saldo + 50
+WHERE user_id = '901152615864340561'

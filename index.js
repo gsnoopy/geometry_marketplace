@@ -26,6 +26,7 @@ const { submitAdModal } = require('./modules/submitModals/submitAdModal');
 const { submitDeleteAdModal } = require('./modules/submitModals/submitDeleteAdModal');
 
 const { seeProfile } = require('./modules/pressButtons/seeProfile');
+const { buyAd } = require('./modules/pressButtons/buyAd'); 
 
 
 const { verifyPayment } = require('./scripts/verifyPayment');
@@ -58,7 +59,8 @@ client.on('interactionCreate', (interaction) => {
     createEditProfileModal(interaction);
     createSaldoModal(interaction);
     createDeleteAdModal(interaction);
-    seeProfile(interaction)
+    seeProfile(interaction);
+    buyAd(interaction);
   }
 
   if (interaction.isModalSubmit()){

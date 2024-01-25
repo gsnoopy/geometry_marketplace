@@ -25,7 +25,7 @@ async function seeProfile(interaction) {
                 const userInvitedBy = userData.cupom;
     
                 const embed = new Discord.EmbedBuilder()
-                    .setColor(0x00958F)
+                    .setColor(0x020202)
                     .setTitle(`Olá ${userDiscordName}, esse é o seu perfil!`)
                     .setThumbnail(userAvatar)
                     .setDescription("Não hesite em alterar os seguintes dados se necessário:")
@@ -52,12 +52,12 @@ async function seeProfile(interaction) {
                     new Discord.ButtonBuilder()
                     .setCustomId("editProfile")
                     .setLabel("Editar perfil")
-                    .setEmoji("⚙️")
+                    .setEmoji("<:editProfile:1199292213969047623>")
                     .setStyle(Discord.ButtonStyle.Primary),
                     new Discord.ButtonBuilder()
                     .setCustomId("deleteAd")
-                    .setLabel("Excluir um anúncio")
-                    .setEmoji("⚙️")
+                    .setLabel("Excluir anúncio")
+                    .setEmoji("<:deleteAd:1199292226988154880>")
                     .setStyle(Discord.ButtonStyle.Primary),
                 );
                 
