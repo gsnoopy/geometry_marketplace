@@ -34,14 +34,13 @@ module.exports = {
                 .setThumbnail(userAvatar)
                 .setDescription("Não hesite em alterar os seguintes dados se necessário:")
                 .addFields(
-                    { name: 'Nome:', value: userName},
-                    { name: 'ID:', value: userId },
-                    { name: 'CPF:', value: userCPF},
-                    { name: 'Email:', value: userEmail},
-                    { name: 'Chave PIX:', value: userPIX},
-                    { name: 'Saldo:', value: userBalance},
-                    { name: 'Indicado por:', value: userInvitedBy},
-                )
+                  { name: '<:Name:1199292094368448572> Nome:', value: userName},
+                  { name: '<:idBadge:1199292190933917696> ID:', value: userId },
+                  { name: '<:mailProfile:1199292107035262996> Email:', value: userEmail},
+                  { name: '<:pixKey:1199292080145584191> Chave PIX:', value: userPIX},
+                  { name: '<:ProfileSaldo:1199292067734630500> Saldo:', value: userBalance},
+                  { name: '<:cupomProfile:1199292242649690153> Indicado por:', value: userInvitedBy},
+              )
                 .setTimestamp()
 
                 if (announcementsData.length > 0) {
@@ -55,13 +54,18 @@ module.exports = {
             const buttons = new Discord.ActionRowBuilder().addComponents(
                 new Discord.ButtonBuilder()
                 .setCustomId("editProfile")
+                .setLabel("Editar Perfil")
                 .setEmoji("<:editProfile:1199292213969047623>")
-                .setEmoji("⚙️")
                 .setStyle(Discord.ButtonStyle.Primary),
                 new Discord.ButtonBuilder()
                 .setCustomId("deleteAd")
                 .setLabel("Excluir um anúncio")
                 .setEmoji("<:deleteAd:1199292226988154880>")
+                .setStyle(Discord.ButtonStyle.Primary),
+                new Discord.ButtonBuilder()
+                .setCustomId("bePremium")
+                .setLabel("Seja Premium")
+                .setEmoji("<:userPremium:1199982425141424128>") 
                 .setStyle(Discord.ButtonStyle.Primary),
             );
             

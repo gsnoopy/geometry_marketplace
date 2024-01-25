@@ -50,7 +50,7 @@ async function submitAd(interaction) {
 
         const stringMarkdow = "`"
         const embed = new Discord.EmbedBuilder()
-        .setColor(0x00958F)
+        .setColor(0x020202)
         .setTitle(`${title}`)
         .setThumbnail(userAvatar)
         .setDescription(`${stringMarkdow}${description}${stringMarkdow}`)
@@ -67,12 +67,12 @@ async function submitAd(interaction) {
           new Discord.ButtonBuilder()
           .setCustomId("buyAd")
           .setLabel("Comprar produto")
-          .setEmoji("💰")
-          .setStyle(Discord.ButtonStyle.Secondary),
+          .setEmoji("<:buyAd:1199982419701411840>")
+          .setStyle(Discord.ButtonStyle.Primary),
           new Discord.ButtonBuilder()
           .setCustomId("upAd")
-          .setLabel("Up (one/24h)")
-          .setEmoji("⬆️")
+          .setLabel("Up 1/24h")
+          .setEmoji("<:upAd:1199982423681810483>")
           .setStyle(Discord.ButtonStyle.Primary),
       );
 

@@ -11,7 +11,7 @@ module.exports = {
         interaction.reply({ content: `Você não possui permissão para utilzar este comando!`, ephemeral: true })
     } else {
         let embed = new Discord.EmbedBuilder()
-        .setColor(0x00958F)
+        .setColor(0x020202)
         .setDescription("Criar anúncio");
         
         let painel = new Discord.ActionRowBuilder().addComponents(
@@ -22,27 +22,27 @@ module.exports = {
                 {
                     label: "League of Legends",
                     value: "lol_option",
-                    emoji: "<:lol:1198216501698773123>"
+                    emoji: "<:LolIcon:1199983426783154176>"
                 },
                 {
                     label: "Valorant",
                     value: "valorant_option",
-                    emoji: "<:valorant:1198216504194379816>"
+                    emoji: "<:ValorantIcon:1199291996012040262>"
                 },
                 {
                     label: "Fortnite",
                     value: "fortnite_option",
-                    emoji: "<:fortnite:1198216505813381120>"
+                    emoji: "<:FortniteIcon:1199292201054781510>"
                 },
                 {
                     label: "Steam",
                     value: "steam_option",
-                    emoji: "<:steam:1198216497483485245>"
+                    emoji: "<:SteamIcon:1199292015473598575>"
                 },
                 {
                     label: "Keys",
                     value: "keys_option",
-                    emoji: "<:digitalkey:1198216499702276196>"
+                    emoji: "<:KeyIcon:1199980188159705188>"
                 }
             )
         );

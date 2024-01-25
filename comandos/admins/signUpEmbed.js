@@ -11,15 +11,15 @@ module.exports = {
         interaction.reply({ content: `Você não possui permissão para utilzar este comando!`, ephemeral: true })
     } else {
         let embed = new Discord.EmbedBuilder()
-        .setColor(0x00958F)
+        .setColor(0x020202)
         .setDescription("Sign Up Embed")
         
         const button = new Discord.ActionRowBuilder().addComponents(
             new Discord.ButtonBuilder()
             .setCustomId("signup")
             .setLabel("Cadastrar-se")
-            .setEmoji("🪪") 
-            .setStyle(Discord.ButtonStyle.Secondary),
+            .setEmoji("<:signUp:1199292028165574767>") 
+            .setStyle(Discord.ButtonStyle.Primary),
         );
 
         interaction.reply({ content: `✅ Mensagem enviada!`, ephemeral: true })
