@@ -1,6 +1,6 @@
-const db = require('../database');
+const db = require('../../database');
 
-async function editUserDatabase(userID, newName, newEmail, newCPF, newPIX) {
+async function editUser(userID, newName, newEmail, newCPF, newPIX) {
   const client = await db.query('BEGIN');
 
   try {
@@ -58,6 +58,4 @@ async function editUserDatabase(userID, newName, newEmail, newCPF, newPIX) {
   }
 }
 
-module.exports = {
-  editUserDatabase,
-};
+module.exports = { editUser };

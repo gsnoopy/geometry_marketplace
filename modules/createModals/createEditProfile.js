@@ -1,53 +1,48 @@
 const { ActionRowBuilder, ModalBuilder, TextInputBuilder, TextInputStyle } = require('../../imports');
 
-function createSignUpModal(interaction) {
-    if (interaction.customId === 'signup') {
+function createEditProfile(interaction) {
+    if (interaction.customId === 'editProfile') {
         const modal = new ModalBuilder()
-            .setCustomId('signUpModal')
-            .setTitle(`Cadastro Geometry Marketplace`);
+            .setCustomId('editProfileModal')
+            .setTitle(`Insira conteúdo no campo que deseja editar.`);
   
         const nameInput = new TextInputBuilder()
             .setCustomId('nameInput')
             .setLabel("Nome completo")
-            .setStyle(TextInputStyle.Short);
+            .setStyle(TextInputStyle.Short)
+            .setRequired(false);
 
         const emailInput = new TextInputBuilder()
             .setCustomId('emailInput')
-            .setLabel("Digite um e-mail válido")
-            .setStyle(TextInputStyle.Short);
+            .setLabel("Email")
+            .setStyle(TextInputStyle.Short)
+            .setRequired(false);
 
         const cpfInput = new TextInputBuilder()
             .setCustomId('cpfInput')
             .setLabel("CPF")
-            .setStyle(TextInputStyle.Short);
+            .setStyle(TextInputStyle.Short)
+            .setRequired(false);
 
         const pixInput = new TextInputBuilder()
             .setCustomId('pixInput')
             .setLabel("Chave PIX")
             .setStyle(TextInputStyle.Short)
+            .setRequired(false);
   
-        const indicacaoInput = new TextInputBuilder()
-            .setCustomId('indicacaoInput')
-            .setLabel("Cupom de Indicação")
-            .setStyle(TextInputStyle.Short)
-
         const firstActionRow = new ActionRowBuilder().addComponents(nameInput);
         const secondActionRow = new ActionRowBuilder().addComponents(emailInput);
         const thirdActionRow = new ActionRowBuilder().addComponents(cpfInput);
-        const fourthActionRow = new ActionRowBuilder().addComponents(pixInput);
-        const fifthActionrRow = new ActionRowBuilder().addComponents(indicacaoInput);
+        const fourthActionrOW = new ActionRowBuilder().addComponents(pixInput);
 
         modal.addComponents(firstActionRow);
         modal.addComponents(secondActionRow);
         modal.addComponents(thirdActionRow);
-        modal.addComponents(fourthActionRow);
-        modal.addComponents(fifthActionrRow);
+        modal.addComponents(fourthActionrOW);
 
         interaction.showModal(modal);
     }
 }
   
-module.exports = {
-    createSignUpModal
-};
+module.exports = { createEditProfile };
   

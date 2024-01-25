@@ -1,6 +1,6 @@
-const { registerUserDatabase } = require('../../database/registerUserDatabase');
+const { registerUser } = require('../../database/create/registerUser');
 
-async function submitSignUpModal(interaction) {
+async function submitSignUp(interaction) {
 
   try {
     if (interaction.customId === 'signUpModal') {
@@ -14,7 +14,7 @@ async function submitSignUpModal(interaction) {
         const saldo = 0.0;
 
         interaction.deferReply({ content: "Aguarde estamos realizando o seu cadastro", ephemeral: true }) 
-        await registerUserDatabase(name, email, cpf, pix, userID, saldo, cupom);
+        await registerUser(name, email, cpf, pix, userID, saldo, cupom);
         interaction.editReply({ content: "Usuário cadastrado!", ephemeral: true });
 
     }
@@ -24,6 +24,4 @@ async function submitSignUpModal(interaction) {
   }
 }
 
-module.exports = {
-  submitSignUpModal,
-};
+module.exports = { submitSignUp };

@@ -13,17 +13,17 @@ const client = new Client({
 client.slashCommands = new Discord.Collection();
 require('./handler')(client);
 
-const { createSignUpModal } = require('./modules/createModals/createSignUpModal');
-const { createEditProfileModal } = require('./modules/createModals/createEditProfileModal');
-const { createAdModal } = require('./modules/createModals/createAdModal');
-const { createSaldoModal } = require('./modules/createModals/createSaldoModal');
-const { createDeleteAdModal } = require('./modules/createModals/createDeleteAdModal');
+const { createSignUp } = require('./modules/createModals/createSignUp');
+const { createEditProfile } = require('./modules/createModals/createEditProfile');
+const { createAd } = require('./modules/createModals/createAd');
+const { createAddSaldo } = require('./modules/createModals/createAddSaldo');
+const { createDeleteAd } = require('./modules/createModals/createDeleteAd');
 
-const { submitSignUpModal } = require('./modules/submitModals/submitSignUpModal');
-const { submitEditProfileModal } = require('./modules/submitModals/submitEditProfileModal');
-const { submitSaldoModal } = require('./modules/submitModals/submitSaldoModal');
-const { submitAdModal } = require('./modules/submitModals/submitAdModal');
-const { submitDeleteAdModal } = require('./modules/submitModals/submitDeleteAdModal');
+const { submitSignUp } = require('./modules/submitModals/submitSignUp');
+const { submitEditProfile } = require('./modules/submitModals/submitEditProfile');
+const { submitAddSaldo } = require('./modules/submitModals/submitAddSaldo');
+const { submitAd } = require('./modules/submitModals/submitAd');
+const { submitDeleteAd } = require('./modules/submitModals/submitDeleteAd');
 
 const { seeProfile } = require('./modules/pressButtons/seeProfile');
 const { buyAd } = require('./modules/pressButtons/buyAd'); 
@@ -55,27 +55,27 @@ client.on('interactionCreate', (interaction) => {
   }
 
   if(interaction.isButton()){
-    createSignUpModal(interaction);
-    createEditProfileModal(interaction);
-    createSaldoModal(interaction);
-    createDeleteAdModal(interaction);
+    createSignUp(interaction);
+    createEditProfile(interaction);
+    createAddSaldo(interaction);
+    createDeleteAd(interaction);
     seeProfile(interaction);
     buyAd(interaction);
   }
 
   if (interaction.isModalSubmit()){
-    submitSignUpModal(interaction);
-    submitEditProfileModal(interaction);
-    submitSaldoModal(interaction);
-    submitAdModal(interaction);
-    submitDeleteAdModal(interaction);
+    submitSignUp(interaction);
+    submitEditProfile(interaction);
+    submitAddSaldo(interaction);
+    submitAd(interaction);
+    submitDeleteAd(interaction);
   }
 
     if (interaction.isStringSelectMenu()) {
 
       const selectedOptions = interaction.values;
       interaction.client.tempData = { adModalOptions: selectedOptions }
-      createAdModal(interaction);
+      createAd(interaction);
     }
 
 });

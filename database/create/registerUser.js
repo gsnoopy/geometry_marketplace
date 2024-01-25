@@ -1,6 +1,6 @@
-const db = require('../database');
+const db = require('../../database');
 
-async function registerUserDatabase(name, email, cpf, pix, userID, saldo, cupom) {
+async function registerUser(name, email, cpf, pix, userID, saldo, cupom) {
   const client = await db.query('BEGIN');
 
   try {
@@ -21,6 +21,4 @@ async function registerUserDatabase(name, email, cpf, pix, userID, saldo, cupom)
   }
 }
 
-module.exports = {
-    registerUserDatabase
-};
+module.exports = { registerUser };

@@ -1,6 +1,6 @@
 const { ActionRowBuilder, ModalBuilder, TextInputBuilder, TextInputStyle } = require('../../imports');
 
-function createAdModal(interaction) {
+function createAd(interaction) {
     if (interaction.customId === 'ad_options') {
 
         const selectedOptions = interaction.client.tempData?.adModalOptions || [];
@@ -55,7 +55,5 @@ function createAdModal(interaction) {
     }
 }
   
-module.exports = {
-    createAdModal
-};
+module.exports = { createAd };
   

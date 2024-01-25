@@ -1,6 +1,6 @@
-const db = require('../database');
+const db = require('../../database');
 
-async function getCategoryByIdDatabase(categoria_id) {
+async function getCategoryById(categoria_id) {
   const client = await db.query('BEGIN');
 
   try {
@@ -24,6 +24,4 @@ async function getCategoryByIdDatabase(categoria_id) {
   }
 }
 
-module.exports = {
-  getCategoryByIdDatabase,
-};
+module.exports = { getCategoryById };

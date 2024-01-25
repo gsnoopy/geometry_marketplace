@@ -1,6 +1,6 @@
-const db = require('../database');
+const db = require('../../database');
 
-async function deleteAdByIdDatabase(messageId) {
+async function deleteAdById(messageId) {
   const client = await db.query('BEGIN');
 
   try {
@@ -18,6 +18,4 @@ async function deleteAdByIdDatabase(messageId) {
   }
 }
 
-module.exports = {
-  deleteAdByIdDatabase,
-};
+module.exports = { deleteAdById };

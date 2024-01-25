@@ -1,7 +1,7 @@
 const { Discord, ActionRowBuilder, ModalBuilder, TextInputBuilder, TextInputStyle } = require('../../imports');
-const { registerAdDatabase } = require('../../database/registerAdDatabase');
+const { registerAd } = require('../../database/create/registerAd');
 
-async function submitAdModal(interaction) {
+async function submitAd(interaction) {
 
   try {
     if (interaction.customId === 'adModal') {
@@ -79,7 +79,7 @@ async function submitAdModal(interaction) {
       if (channel) {
         const sentMessage = await channel.send({ embeds: [embed], components: [buttons]});
         const messageId = sentMessage.id;
-        await registerAdDatabase(id_category,description,link,data,title,user_id,value, messageId)
+        await registerAd(id_category,description,link,data,title,user_id,value, messageId)
 
       }
 
@@ -93,6 +93,4 @@ async function submitAdModal(interaction) {
 
 }
 
-module.exports = {
-  submitAdModal,
-};
+module.exports = { submitAd };

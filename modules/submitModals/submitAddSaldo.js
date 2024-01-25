@@ -3,10 +3,10 @@ const qrcode = require('qrcode');
 const fs = require('fs');
 const { AttachmentBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { Discord } = require('../../imports');
-const { getUserDatabase } = require('../../database/getUserDatabase');
-const { registerTransactionsDatabase } = require('../../database/registerTransactionsDatabase');
+const { getUserById } = require('../../database/read/getUserById');
+const { registerTransactionSaldo } = require('../../database/create/registerTransactionSaldo');
 
-async function submitSaldoModal(interaction) {
+async function submitAddSaldo(interaction) {
   try {
     if (interaction.customId === 'saldoModal') {
 
@@ -52,7 +52,7 @@ async function submitSaldoModal(interaction) {
 
       const valor = interaction.fields.getTextInputValue('valorInput');
       const userId = interaction.user.id;
-      const usuarioEncontrado = await getUserDatabase(userId);
+      const usuarioEncontrado = await getUserById(userId);
       const channelId = channel.id;
 
       const transactionAmount = Number(valor);
@@ -103,7 +103,7 @@ async function submitSaldoModal(interaction) {
 
       const file = new AttachmentBuilder('./temp/qrcode.png');
 
-      await registerTransactionsDatabase(userId, paymentID, channelId, transactionAmount);
+      await registerTransactionSaldo(userId, paymentID, channelId, transactionAmount);
 
       const embed = new EmbedBuilder()
         .setColor(0x030303)
@@ -131,6 +131,4 @@ async function submitSaldoModal(interaction) {
   }
 }
 
-module.exports = {
-  submitSaldoModal,
-};
+module.exports = { submitAddSaldo };

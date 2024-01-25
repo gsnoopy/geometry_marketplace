@@ -71,6 +71,4 @@ async function verifyApprovedPayment(mp_id) {
   }
 }
 
-module.exports = {
-  verifyPayment,
-};
+module.exports = { verifyPayment };

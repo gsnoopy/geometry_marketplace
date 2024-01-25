@@ -1,4 +1,4 @@
-const db = require('../database');
+const db = require('../../database');
 
 async function getAdByUser(userId) {
   const client = await db.query('BEGIN');
@@ -20,6 +20,4 @@ async function getAdByUser(userId) {
   }
 }
 
-module.exports = {
-  getAdByUser,
-};
+module.exports = { getAdByUser };

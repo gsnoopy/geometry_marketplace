@@ -1,8 +1,8 @@
-const { getAdByIdDatabase } = require('../../database/getAdByIdDatabase');
-const { getCategoryByIdDatabase } = require('../../database/getCategoryByIdDatabase');
-const { deleteAdByIdDatabase } = require('../../database/deleteAdByIdDatabase');
+const { getAdById } = require('../../database/read/getAdById');
+const { getCategoryById } = require('../../database/read/getCategoryById');
+const { deleteAdById } = require('../../database/delete/deleteAdById');
 
-async function submitDeleteAdModal(interaction) {
+async function submitDeleteAd(interaction) {
   try {
     if (interaction.customId === 'deleteAdModal') {
       await interaction.deferReply({ ephemeral: true });
@@ -10,14 +10,14 @@ async function submitDeleteAdModal(interaction) {
       const ad_id = interaction.fields.getTextInputValue('anuncioID');
 
       // Verifica se o anúncio existe no banco de dados
-      const existingAd = await getAdByIdDatabase(ad_id);
+      const existingAd = await getAdById(ad_id);
 
       if (existingAd) {
         // Obtém informações da categoria associada ao anúncio
         const category_id = existingAd.categoria_id;
-        const category = await getCategoryByIdDatabase(category_id);
+        const category = await getCategoryById(category_id);
 
-        await deleteAdByIdDatabase(ad_id);
+        await deleteAdById(ad_id);
 
         if (category) {
 
@@ -41,6 +41,4 @@ async function submitDeleteAdModal(interaction) {
   }
 }
 
-module.exports = {
-  submitDeleteAdModal,
-};
+module.exports = { submitDeleteAd };

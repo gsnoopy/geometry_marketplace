@@ -41,6 +41,4 @@ async function confirmBuy(interaction, existingAd, user, saldo, saldoFinal) {
   });
 }
 
-module.exports = {
-  confirmBuy,
-};
+module.exports = { confirmBuy };

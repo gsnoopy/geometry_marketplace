@@ -1,6 +1,6 @@
-const db = require('../database');
+const db = require('../../database');
 
-async function getUserDatabase(userId) {
+async function getUserById(userId) {
   const client = await db.query('BEGIN');
 
   try {
@@ -24,6 +24,4 @@ async function getUserDatabase(userId) {
   }
 }
 
-module.exports = {
-  getUserDatabase,
-};
+module.exports = { getUserById };

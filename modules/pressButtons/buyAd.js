@@ -1,5 +1,5 @@
-const { getAdByIdDatabase } = require('../../database/getAdByIdDatabase');
-const { getUserDatabase } = require('../../database/getUserDatabase');
+const { getAdById } = require('../../database/read/getAdById');
+const { getUserById } = require('../../database/read/getUserById');
 const { confirmBuy } = require('./confirmBuy');
 
 async function buyAd(interaction) {
@@ -9,10 +9,10 @@ async function buyAd(interaction) {
 
       const ad_id = interaction.message.id;
       const user_id = interaction.user.id;
-      const existingAd = await getAdByIdDatabase(ad_id);
+      const existingAd = await getAdById(ad_id);
 
       if (existingAd) {
-        const user = await getUserDatabase(user_id);
+        const user = await getUserById(user_id);
         const saldo = user.saldo;
 
         if (saldo >= existingAd.value) {
@@ -39,6 +39,4 @@ async function buyAd(interaction) {
   }
 }
 
-module.exports = {
-  buyAd,
-};
+module.exports = { buyAd };

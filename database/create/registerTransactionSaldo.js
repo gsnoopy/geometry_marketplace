@@ -1,6 +1,6 @@
-const db = require('../database');
+const db = require('../../database');
 
-async function registerTransactionsDatabase(user_id, mp_id, channel_id, transaction_amount) {
+async function registerTransactionSaldo(user_id, mp_id, channel_id, transaction_amount) {
   const client = await db.query('BEGIN');
 
   try {
@@ -23,6 +23,4 @@ async function registerTransactionsDatabase(user_id, mp_id, channel_id, transact
   }
 }
 
-module.exports = {
-  registerTransactionsDatabase,
-};
+module.exports = { registerTransactionSaldo };

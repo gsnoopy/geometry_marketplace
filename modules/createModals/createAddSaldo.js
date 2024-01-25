@@ -1,6 +1,6 @@
 const { ActionRowBuilder, ModalBuilder, TextInputBuilder, TextInputStyle } = require('../../imports');
 
-function createSaldoModal(interaction) {
+function createAddSaldo(interaction) {
     if (interaction.customId === 'comprarSaldo') {
         const modal = new ModalBuilder()
             .setCustomId('saldoModal')
@@ -20,7 +20,5 @@ function createSaldoModal(interaction) {
     }
 }
   
-module.exports = {
-    createSaldoModal
-};
+module.exports = { createAddSaldo };
   

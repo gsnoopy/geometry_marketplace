@@ -1,6 +1,6 @@
-const { editUserDatabase } = require('../../database/editUserDatabase');
+const { editUser } = require('../../database/edit/editUser');
 
-async function submitEditProfileModal(interaction) {
+async function submitEditProfile(interaction) {
 
   try {
     if (interaction.customId === 'editProfileModal') {
@@ -12,7 +12,7 @@ async function submitEditProfileModal(interaction) {
         const pix = interaction.fields.getTextInputValue('pixInput');
 
         interaction.deferReply({ content: "Aguarde estamos atualizando os seus dados", ephemeral: true }) 
-        await editUserDatabase(userId, name, email, cpf, pix);
+        await editUser(userId, name, email, cpf, pix);
         interaction.editReply({ content: "Dados atualizados, utilize /perfil para verifica-los!", ephemeral: true });
 
     }
@@ -22,6 +22,4 @@ async function submitEditProfileModal(interaction) {
   }
 }
 
-module.exports = {
-  submitEditProfileModal,
-};
+module.exports = { submitEditProfile };

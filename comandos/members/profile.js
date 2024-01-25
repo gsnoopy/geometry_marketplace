@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
-const { getAdByUser } = require("../../database/getAdByUserDatabase");
-const { getUserDatabase } = require('../../database/getUserDatabase');
+const { getAdByUser } = require("../../database/read/getAdByUser");
+const { getUserById } = require('../../database/read/getUserById');
 
 module.exports = {
   name: "perfil",
@@ -13,7 +13,7 @@ module.exports = {
       
         await interaction.deferReply({ ephemeral: true });
 
-        const userData = await getUserDatabase(interaction.user.id);
+        const userData = await getUserById(interaction.user.id);
         const announcementsData = await getAdByUser(interaction.user.id);
 
         if (userData) {

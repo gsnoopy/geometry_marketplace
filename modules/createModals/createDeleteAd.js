@@ -1,6 +1,6 @@
 const { ActionRowBuilder, ModalBuilder, TextInputBuilder, TextInputStyle } = require('../../imports');
 
-function createDeleteAdModal(interaction) {
+function createDeleteAd(interaction) {
     if (interaction.customId === 'deleteAd') {
         
         const modal = new ModalBuilder()
@@ -21,7 +21,5 @@ function createDeleteAdModal(interaction) {
     }
 }
   
-module.exports = {
-    createDeleteAdModal
-};
+module.exports = { createDeleteAd };
   
