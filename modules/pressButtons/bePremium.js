@@ -22,7 +22,7 @@ async function bePremium(interaction) {
       if (member.roles.cache.has(premiumRoleId)) {
         await interaction.editReply({ content: 'Você já é um membro premium!', ephemeral: true });
       } else {
-        if (saldo_user <= process.env.PREMIUM_PRICE) {
+        if (saldo_user < process.env.PREMIUM_PRICE) {
           await interaction.editReply({ content: `Você não possui saldo suficiente, seu saldo é ${stringMarkdow}${saldo_user}${stringMarkdow} o valor para se tornar Premium é de ${stringMarkdow}${process.env.PREMIUM_PRICE}${stringMarkdow}!`, ephemeral: true });
         } else {
           const buttons = new Discord.ActionRowBuilder().addComponents(

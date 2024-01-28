@@ -48,6 +48,16 @@ CREATE TABLE transactions_anuncio (
     anuncio_title VARCHAR(255) NOT NULL
 );
 
+CREATE TABLE sales (
+    sale_id SERIAL PRIMARY KEY,
+    user_id VARCHAR(255),
+    seller_id VARCHAR(255),
+    category VARCHAR(255),
+    value NUMERIC,
+    revenue NUMERIC,
+    data TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 CREATE TABLE premiums (
     user_id VARCHAR(255) PRIMARY KEY,
     data_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP

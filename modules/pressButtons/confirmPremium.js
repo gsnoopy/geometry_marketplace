@@ -3,6 +3,7 @@ const { AttachmentBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, Button
 const { getUserById } = require('../../database/read/getUserById');
 const { registerPremium } = require('../../database/create/registerPremium');
 const { updateUserSaldo } = require('../../database/edit/updateUserSaldo');
+const { registerSale } = require("../../database/create/registerSale");
 
 async function confirmPremium(interaction) {
   let client;
@@ -51,8 +52,10 @@ async function confirmPremium(interaction) {
       const userDB = await getUserById(user.id);
       const premiumPrice = parseFloat(process.env.PREMIUM_PRICE);
       const updatedSaldo = userDB.saldo - premiumPrice;
+      const revenue = (premiumPrice - (premiumPrice * 0.01)).toFixed(2);
       await updateUserSaldo(user.id, updatedSaldo);
       await registerPremium(user.id)
+      await registerSale(user.id,'Geometry Marketplace',13,premiumPrice,revenue)
 
       await interaction.followUp({ content: 'Usuário agora é premium!', ephemeral: true });
     }

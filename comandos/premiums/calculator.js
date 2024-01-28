@@ -2,7 +2,7 @@ const Discord = require("discord.js")
 
 module.exports = {
   name: "taxas",
-  description: "Calcule taxas a partir de um valor",
+  description: "[PREMIUM] Calcule taxas a partir de um valor",
   type: Discord.ApplicationCommandType.ChatInput,
   options: [
     {
@@ -26,7 +26,6 @@ module.exports = {
 
         const valorString = interaction.options.getString("valor");
         const valor = Number(valorString.replace(',', '.'));
-        console.log(valor)
 
         if (isNaN(valor)) {
           await interaction.editReply({ content: 'Por favor, digite um valor numérico válido (Separador de casas decimais é o ponto e não virgula).', ephemeral: true });
@@ -41,7 +40,7 @@ module.exports = {
 
         const embed = new Discord.EmbedBuilder()
         .setColor(0x020202)
-        .setDescription(`Taxas atuais:\nVenda --> 9%\nSaque --> 1%\n\nValor selecionado: ${valor}\nValor após venda: ${valorPosVenda}\n Valor após saque: ${valorPosSaque}`)
+        .setDescription(`<:TaxesIcon:1201060309469773864> **Taxas atuais:**\n<:pointIcon:1201060305732640778> Venda ⭢ 9%\n<:pointIcon:1201060305732640778> Saque ⭢ 1%\n\n<:CoinsIcon:1201060304365310003> **Valor selecionado:** R$ ${valor}\n<:StoreIcon:1201060308056281149> **Valor após venda:** R$ ${valorPosVenda}\n<:CashOutIcon:1201060301269901412> **Valor após saque:** R$  ${valorPosSaque}`)
 
         await interaction.editReply({ embeds: [embed], ephemeral: true });
 
