@@ -27,6 +27,7 @@ const { submitDeleteAd } = require('./modules/submitModals/submitDeleteAd');
 
 const { seeProfile } = require('./modules/pressButtons/seeProfile');
 const { buyAd } = require('./modules/pressButtons/buyAd'); 
+const { bePremium } = require('./modules/pressButtons/bePremium');
 
 
 const { verifyPayment } = require('./scripts/verifyPayment');
@@ -61,6 +62,7 @@ client.on('interactionCreate', (interaction) => {
     createDeleteAd(interaction);
     seeProfile(interaction);
     buyAd(interaction);
+    bePremium(interaction);
   }
 
   if (interaction.isModalSubmit()){

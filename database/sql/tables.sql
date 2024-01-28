@@ -47,3 +47,8 @@ CREATE TABLE transactions_anuncio (
     categoria_id INTEGER REFERENCES categorias(id),
     anuncio_title VARCHAR(255) NOT NULL
 );
+
+CREATE TABLE premiums (
+    user_id VARCHAR(255) PRIMARY KEY,
+    data_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
