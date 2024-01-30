@@ -16,11 +16,6 @@ function createSignUp(interaction) {
             .setLabel("Digite um e-mail válido")
             .setStyle(TextInputStyle.Short);
 
-        const cpfInput = new TextInputBuilder()
-            .setCustomId('cpfInput')
-            .setLabel("CPF")
-            .setStyle(TextInputStyle.Short);
-
         const pixInput = new TextInputBuilder()
             .setCustomId('pixInput')
             .setLabel("Chave PIX")
@@ -33,13 +28,11 @@ function createSignUp(interaction) {
 
         const firstActionRow = new ActionRowBuilder().addComponents(nameInput);
         const secondActionRow = new ActionRowBuilder().addComponents(emailInput);
-        const thirdActionRow = new ActionRowBuilder().addComponents(cpfInput);
         const fourthActionRow = new ActionRowBuilder().addComponents(pixInput);
         const fifthActionrRow = new ActionRowBuilder().addComponents(indicacaoInput);
 
         modal.addComponents(firstActionRow);
         modal.addComponents(secondActionRow);
-        modal.addComponents(thirdActionRow);
         modal.addComponents(fourthActionRow);
         modal.addComponents(fifthActionrRow);
 

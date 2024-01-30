@@ -23,7 +23,6 @@ module.exports = {
             const userAvatar = interaction.user.displayAvatarURL({ format: 'png', dynamic: true, size: 1024 }); 
             const userName = userData.name;
             const userEmail = userData.email;
-            const userCPF = userData.cpf;
             const userPIX = userData.pix;
             const userBalance = userData.saldo;
             const userInvitedBy = userData.cupom;

@@ -59,7 +59,7 @@ async function submitAddSaldo(interaction) {
       const description = `Saldo Geometry Marketplace - ${transactionAmount}`;
       const buyerName = `${usuarioEncontrado.name}`;
       const buyerEmail = `${usuarioEncontrado.email}`;
-      const buyerCPF = `${usuarioEncontrado.cpf}`;
+      const buyerCPF = '47161952441';
       const accessToken = process.env.MP_TOKEN;
       const apiUrl = 'https://api.mercadopago.com/v1/payments';
 

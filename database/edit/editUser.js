@@ -1,6 +1,6 @@
 const db = require('../../database');
 
-async function editUser(userID, newName, newEmail, newCPF, newPIX) {
+async function editUser(userID, newName, newEmail, newPIX) {
   const client = await db.query('BEGIN');
 
   try {
@@ -19,12 +19,6 @@ async function editUser(userID, newName, newEmail, newCPF, newPIX) {
     if (newEmail !== null && newEmail !== undefined && newEmail !== '') {
       updateUsuarioQuery += ` email = $${paramIndex},`;
       queryParams.push(newEmail);
-      paramIndex++;
-    }
-
-    if (newCPF !== null && newCPF !== undefined && newCPF !== '') {
-      updateUsuarioQuery += ` cpf = $${paramIndex},`;
-      queryParams.push(newCPF);
       paramIndex++;
     }
 

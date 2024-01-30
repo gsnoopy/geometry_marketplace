@@ -8,11 +8,10 @@ async function submitEditProfile(interaction) {
         const userId = interaction.user.id;
         const name = interaction.fields.getTextInputValue('nameInput');
         const email = interaction.fields.getTextInputValue('emailInput');
-        const cpf = interaction.fields.getTextInputValue('cpfInput');
         const pix = interaction.fields.getTextInputValue('pixInput');
 
         interaction.deferReply({ content: "Aguarde estamos atualizando os seus dados", ephemeral: true }) 
-        await editUser(userId, name, email, cpf, pix);
+        await editUser(userId, name, email, pix);
         interaction.editReply({ content: "Dados atualizados, utilize /perfil para verifica-los!", ephemeral: true });
 
     }
