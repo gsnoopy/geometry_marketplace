@@ -1,7 +1,12 @@
+const { AttachmentBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
+const { Discord } = require('../../imports');
+
 const { getAdById } = require('../../database/read/getAdById');
 const { getUserById } = require('../../database/read/getUserById');
 const { registerTransactionAd } = require('../../database/create/registerTransactionAd');
 const { confirmBuy } = require('./confirmBuy');
+const { updateUserSaldo } = require('../../database/edit/updateUserSaldo');
+const { deleteAdById } = require('../../database/delete/deleteAdById');
 
 async function buyAd(interaction) {
   try {
@@ -9,8 +14,9 @@ async function buyAd(interaction) {
       await interaction.deferReply({ ephemeral: true });
 
       const ad_id = interaction.message.id;
-      const user_id = interaction.user.id
+      const ad_message = interaction.message;
       const existingAd = await getAdById(ad_id);
+      const user_id = interaction.user.id
 
       if (existingAd) {
         const user = await getUserById(user_id);
@@ -28,10 +34,61 @@ async function buyAd(interaction) {
           const category = existingAd.categoria_id
           const title = existingAd.title
 
+          const buyer_saldo = (user.saldo - saldoAd).toFixed(2);
+
           if (confirmation) {
 
             await registerTransactionAd(seller_id,user_id,saldoAd,saldo_retido,taxa,category,title)
+            await updateUserSaldo(user.user_id, buyer_saldo)
+            await deleteAdById(ad_id)
+            await ad_message.delete();
+
+            const channelName = `🪙﹒${title.substring(0, 12)}`;
+            const categoryChannel = interaction.guild.channels.cache.get(process.env.TICKET_AD) ?? null;
+            const existingChannel = interaction.guild.channels.cache.find(c => c.name === channelName);
+
+            console.log(seller_id);
+            console.log(interaction.user.id)
+
+            console.log(typeof (seller_id))
+            console.log(typeof (interaction.user.id))
+
+            const channel = await interaction.guild.channels.create({
+              name: channelName,
+              type: Discord.ChannelType.GuildText,
+              parent: categoryChannel,
+              permissionOverwrites: [
+                {
+                  id: interaction.guild.id,
+                  deny: [
+                    Discord.PermissionFlagsBits.ViewChannel
+                  ]
+                },
+                {
+                  id: interaction.user.id,
+                  allow: [
+                    Discord.PermissionFlagsBits.ViewChannel,
+                    Discord.PermissionFlagsBits.SendMessages,
+                    Discord.PermissionFlagsBits.AttachFiles,
+                    Discord.PermissionFlagsBits.EmbedLinks,
+                    Discord.PermissionFlagsBits.AddReactions
+                  ]
+                },
+                {
+                  id: seller_id,
+                  allow: [
+                    Discord.PermissionFlagsBits.ViewChannel,
+                    Discord.PermissionFlagsBits.SendMessages,
+                    Discord.PermissionFlagsBits.AttachFiles,
+                    Discord.PermissionFlagsBits.EmbedLinks,
+                    Discord.PermissionFlagsBits.AddReactions
+                  ]
+                },
+              ]
+            });
+
             await interaction.followUp({ content: 'Compra confirmada!', ephemeral: true });
+
           } else {
             await interaction.followUp({ content: 'Compra cancelada.', ephemeral: true });
           }
