@@ -25,6 +25,8 @@ async function confirmBuy(interaction, existingAd, user, saldo, saldoFinal) {
       collector.on('collect', async (i) => {
         // Resolve ou rejeita com base na escolha do usuário
         if (i.customId === 'confirmBuy') {
+          
+
           resolve(true);
         } else {
           resolve(false);

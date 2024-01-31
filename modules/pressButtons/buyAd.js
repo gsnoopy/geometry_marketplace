@@ -1,5 +1,6 @@
 const { getAdById } = require('../../database/read/getAdById');
 const { getUserById } = require('../../database/read/getUserById');
+const { registerTransactionAd } = require('../../database/create/registerTransactionAd');
 const { confirmBuy } = require('./confirmBuy');
 
 async function buyAd(interaction) {
@@ -8,7 +9,7 @@ async function buyAd(interaction) {
       await interaction.deferReply({ ephemeral: true });
 
       const ad_id = interaction.message.id;
-      const user_id = interaction.user.id;
+      const user_id = interaction.user.id
       const existingAd = await getAdById(ad_id);
 
       if (existingAd) {
@@ -16,14 +17,20 @@ async function buyAd(interaction) {
         const saldo = user.saldo;
 
         if (saldo >= existingAd.value) {
-          const saldoFinal = Number(saldo - existingAd.value);
 
-          // Chama a função confirmBuy e aguarda a resposta do usuário
+          const saldoFinal = Number(saldo - existingAd.value);
           const confirmation = await confirmBuy(interaction, existingAd, user, saldo, saldoFinal);
 
+          const seller_id = existingAd.user_id
+          const saldoAd = existingAd.value
+          const saldo_retido =  (existingAd.value - (existingAd.value * 0.09)).toFixed(2)
+          const taxa = (existingAd.value * 0.09).toFixed(2)
+          const category = existingAd.categoria_id
+          const title = existingAd.title
+
           if (confirmation) {
-            // Lógica para confirmar a compra
-            // ...
+
+            await registerTransactionAd(seller_id,user_id,saldoAd,saldo_retido,taxa,category,title)
             await interaction.followUp({ content: 'Compra confirmada!', ephemeral: true });
           } else {
             await interaction.followUp({ content: 'Compra cancelada.', ephemeral: true });
