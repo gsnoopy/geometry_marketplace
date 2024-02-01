@@ -23,6 +23,7 @@ const { submitSignUp } = require('./modules/submitModals/submitSignUp');
 const { submitEditProfile } = require('./modules/submitModals/submitEditProfile');
 const { submitAddSaldo } = require('./modules/submitModals/submitAddSaldo');
 const { submitAd } = require('./modules/submitModals/submitAd');
+const { submitAdPremium } = require('./modules/submitModals/submitAdPremium');
 const { submitDeleteAd } = require('./modules/submitModals/submitDeleteAd');
 
 const { seeProfile } = require('./modules/pressButtons/seeProfile');
@@ -75,6 +76,7 @@ client.on('interactionCreate', (interaction) => {
     submitEditProfile(interaction);
     submitAddSaldo(interaction);
     submitAd(interaction);
+    submitAdPremium(interaction);
     submitDeleteAd(interaction);
   }
 

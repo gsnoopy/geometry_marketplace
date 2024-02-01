@@ -4,6 +4,7 @@ INSERT INTO categorias (name, channel_id) VALUES
   ('fortnite', '1198197670850867290'),
   ('steam', '1198197740526645248'),
   ('keys', '1198197704862478336');
+  ('premium', '0');
 
 DELETE FROM users
 WHERE user_id = 'id_do_usuario';
