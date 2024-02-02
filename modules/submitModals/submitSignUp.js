@@ -14,6 +14,8 @@ async function submitSignUp(interaction) {
 
         interaction.deferReply({ content: "Aguarde estamos realizando o seu cadastro", ephemeral: true }) 
         await registerUser(name, email, pix, userID, saldo, cupom);
+        const idRoleUser = '1202537759336570901'
+        await interaction.member.roles.add(idRoleUser);
         interaction.editReply({ content: "Usuário cadastrado!", ephemeral: true });
 
     }
