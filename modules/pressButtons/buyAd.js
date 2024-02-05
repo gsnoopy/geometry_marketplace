@@ -86,7 +86,32 @@ async function buyAd(interaction) {
                 },
               ]
             });
+            
+            const buyerUser = await interaction.client.users.fetch(interaction.user.id);
+            const sellerUser = await interaction.client.users.fetch(seller_id);
+            const stringMarkdow = "`";
 
+            const embed = new Discord.EmbedBuilder()
+              .setColor(0x020202)
+              .setTitle(`Venda e compra do produto [${existingAd.title}]`)
+              .setThumbnail("https://media.discordapp.net/attachments/1204152785831206964/1204152957290029136/Frame.png?ex=65d3b1d5&is=65c13cd5&hm=e7ccf81359ce86076bcbada80551d08a420061d46232eded4793ff53472fd3f3&=&format=webp&quality=lossless&width=200&height=200")
+              .setDescription(`Dados pré cadastrados pelo vendedor:\n\n${stringMarkdow}${existingAd.information}${stringMarkdow}\n\nEste é um bate-papo entre:\n`)
+              .addFields(
+                { name: '<:idBadge:1199292190933917696> Comprador:', value:  String(buyerUser) },
+                { name: '<:StoreIcon:1201060308056281149> Vendedor:', value: String(sellerUser) },
+            )
+              .setTimestamp()
+            
+            const buttons = new Discord.ActionRowBuilder().addComponents(
+                new Discord.ButtonBuilder()
+                .setCustomId("callStaff")
+                .setLabel("Suporte")
+                .setEmoji("<:SupIcon:1204157952349442099>") 
+                .setStyle(Discord.ButtonStyle.Primary),
+    
+            );
+
+            await channel.send(({ embeds: [embed], components: [buttons] }));
             await interaction.followUp({ content: 'Compra confirmada!', ephemeral: true });
 
           } else {
