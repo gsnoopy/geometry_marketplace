@@ -33,7 +33,8 @@ const { confirmPremium } = require('./modules/pressButtons/confirmPremium');
 const { confirmBoost } = require('./modules/pressButtons/confirmBoost');
 
 const { verifyPayment } = require('./scripts/verifyPayment');
-const { verifyPremiums } = require('./scripts/verifyPremiums')
+const { verifyPremiums } = require('./scripts/verifyPremiums');
+const { verifyAds } = require('./scripts/verifyAds');
 
 
 
@@ -47,6 +48,10 @@ client.on("ready", () => {
   setInterval(() => {
     //verifyPremiums(db, client);
   }, 3600000);
+
+  setInterval(() => {
+    verifyAds(db, client);
+  }, 5000);
 
 });
 
