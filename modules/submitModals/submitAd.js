@@ -83,7 +83,7 @@ async function submitAd(interaction) {
 
       }
 
-      interaction.editReply({ content: `Anúncio criado em ${id_channel}`, ephemeral: true })
+      interaction.editReply({ content: `Anúncio criado em <#${id_channel}>`, ephemeral: true })
 
     }
   } catch (error) {
