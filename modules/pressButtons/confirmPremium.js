@@ -4,9 +4,10 @@ const { getUserById } = require('../../database/read/getUserById');
 const { registerPremium } = require('../../database/create/registerPremium');
 const { updateUserSaldo } = require('../../database/edit/updateUserSaldo');
 const { registerSale } = require("../../database/create/registerSale");
+const { createLog } = require('../../logs/createLog')
 
-async function confirmPremium(interaction) {
-  let client;
+async function confirmPremium(interaction,client) {
+  let test;
   try {
     if (interaction.customId === 'confirmPremium') {
       await interaction.deferReply({ ephemeral: true });
@@ -57,12 +58,19 @@ async function confirmPremium(interaction) {
       await registerPremium(user.id)
       await registerSale(user.id,'Geometry Marketplace',13,premiumPrice,revenue)
 
+      let embed = new Discord.EmbedBuilder()
+      .setColor(0xF900FF)
+      .setDescription(`<@${user.id}> agora é premium.`)
+      .setTimestamp()
+
+      await createLog(client, '1204475943771574292', embed)
+
       await interaction.followUp({ content: 'Usuário agora é premium!', ephemeral: true });
     }
   } catch (error) {
     console.error('Erro na função confirmPremium:', error);
     
-    if (client) {
+    if (test) {
       await db.query('ROLLBACK');
     }
 

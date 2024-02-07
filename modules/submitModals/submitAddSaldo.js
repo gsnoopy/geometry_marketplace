@@ -50,7 +50,8 @@ async function submitAddSaldo(interaction) {
         ephemeral: true 
       });
 
-      const valor = interaction.fields.getTextInputValue('valorInput');
+      const valorString = interaction.fields.getTextInputValue('valorInput');
+      const valor = Number(valorString.replace(',', '.')).toFixed(2);  
       const userId = interaction.user.id;
       const usuarioEncontrado = await getUserById(userId);
       const channelId = channel.id;

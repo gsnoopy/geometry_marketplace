@@ -42,7 +42,7 @@ client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
 
   setInterval(() => {
-    //verifyPayment(db, client);
+    verifyPayment(db, client);
   }, 7000);
 
   setInterval(() => {
@@ -50,7 +50,7 @@ client.on("ready", () => {
   }, 3600000);
 
   setInterval(() => {
-    verifyAds(db, client);
+    //verifyAds(db, client);
   }, 5000);
 
 });
@@ -75,12 +75,12 @@ client.on('interactionCreate', (interaction) => {
     seeProfile(interaction);
     buyAd(interaction);
     bePremium(interaction);
-    confirmPremium(interaction);
+    confirmPremium(interaction,client);
     confirmBoost(interaction);
   }
 
   if (interaction.isModalSubmit()){
-    submitSignUp(interaction);
+    submitSignUp(interaction,client);
     submitEditProfile(interaction);
     submitAddSaldo(interaction);
     submitAd(interaction);

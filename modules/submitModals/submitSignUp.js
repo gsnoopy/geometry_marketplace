@@ -1,10 +1,12 @@
 const { registerUser } = require('../../database/create/registerUser');
+const { createLog } = require('../../logs/createLog');
+const { Discord } = require('../../imports');
 
-async function submitSignUp(interaction) {
+async function submitSignUp(interaction,client) {
 
   try {
     if (interaction.customId === 'signUpModal') {
-
+      
         const name = interaction.fields.getTextInputValue('nameInput');
         const email = interaction.fields.getTextInputValue('emailInput');
         const pix = interaction.fields.getTextInputValue('pixInput');
@@ -16,6 +18,13 @@ async function submitSignUp(interaction) {
         await registerUser(name, email, pix, userID, saldo, cupom);
         const idRoleUser = '1202537759336570901'
         await interaction.member.roles.add(idRoleUser);
+        
+        let embed = new Discord.EmbedBuilder()
+          .setColor(0x004CFF)
+          .setDescription(`<@${userID}> é um novo usuário.`)
+          .setTimestamp()
+
+        await createLog(client, '1204475836330287134', embed)
         interaction.editReply({ content: "Usuário cadastrado!", ephemeral: true });
 
     }

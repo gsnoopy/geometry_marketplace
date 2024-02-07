@@ -1,4 +1,6 @@
 const axios = require('axios');
+const { createLog } = require('../logs/createLog');
+const { Discord, ActionRowBuilder, ModalBuilder, TextInputBuilder, TextInputStyle } = require('../imports');
 
 async function verifyPayment(db, client) {
   try {
@@ -16,16 +18,24 @@ async function verifyPayment(db, client) {
         const channel = client.channels.cache.get(channel_id);
 
         if (channel) {
-          await channel.send('Pagamento aprovado e saldo adicionado! Este canal será fechado em 3 minutos.');
+          await channel.send('Pagamento aprovado e saldo adicionado! Este canal será fechado em 5 segundos.');
         }
+      
+        await db.query('DELETE FROM transactions_saldo WHERE mp_id = $1', [mp_id]);
+
+
+        let embed = new Discord.EmbedBuilder()
+          .setColor(0x00ff47)
+          .setDescription(`<@${user_id}> Adicionou R$ ${transaction_amount} de saldo.`)
+          .setTimestamp()
+
+        await createLog(client, '1204475418003120190', embed)
 
         setTimeout(async () => {
           if (channel) {
             await channel.delete();
           }
-        }, 180000); 
-
-        await db.query('DELETE FROM transactions_saldo WHERE mp_id = $1', [mp_id]);
+        }, 5000);
 
       } else {
 

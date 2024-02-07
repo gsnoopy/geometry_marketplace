@@ -7,6 +7,12 @@ CREATE TABLE users (
   cupom VARCHAR(255)
 );
 
+CREATE TABLE categorias (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    channel_id VARCHAR(255) NOT NULL
+);
+
 CREATE TABLE anuncios (
     anuncio_id SERIAL PRIMARY KEY,
     user_id VARCHAR(255) NOT NULL,
@@ -20,11 +26,6 @@ CREATE TABLE anuncios (
     categoria_id INTEGER REFERENCES categorias(id)
 );
 
-CREATE TABLE categorias (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    channel_id VARCHAR(255) NOT NULL
-);
 
 CREATE TABLE transactions_saldo (
     transaction_id SERIAL PRIMARY KEY,
