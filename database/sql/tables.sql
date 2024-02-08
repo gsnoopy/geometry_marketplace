@@ -45,7 +45,7 @@ CREATE TABLE transactions_anuncio (
     taxa NUMERIC NOT NULL,
     data_hora TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     categoria_id INTEGER REFERENCES categorias(id),
-    anuncio_title VARCHAR(255) NOT NULL
+    title VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE sales (
