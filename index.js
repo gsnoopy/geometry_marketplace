@@ -31,6 +31,7 @@ const { buyAd } = require('./modules/pressButtons/buyAd');
 const { bePremium } = require('./modules/pressButtons/bePremium');
 const { confirmPremium } = require('./modules/pressButtons/confirmPremium');
 const { confirmBoost } = require('./modules/pressButtons/confirmBoost');
+const { successSell } = require('./modules/pressButtons/successSell');
 
 const { verifyPayment } = require('./scripts/verifyPayment');
 const { verifyPremiums } = require('./scripts/verifyPremiums');
@@ -42,7 +43,7 @@ client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
 
   setInterval(() => {
-    verifyPayment(db, client);
+    //verifyPayment(db, client);
   }, 7000);
 
   setInterval(() => {
@@ -77,6 +78,7 @@ client.on('interactionCreate', (interaction) => {
     bePremium(interaction);
     confirmPremium(interaction,client);
     confirmBoost(interaction);
+    successSell(interaction);
   }
 
   if (interaction.isModalSubmit()){

@@ -108,6 +108,11 @@ async function buyAd(interaction) {
                 .setLabel("Suporte")
                 .setEmoji("<:SupIcon:1204157952349442099>") 
                 .setStyle(Discord.ButtonStyle.Primary),
+                new Discord.ButtonBuilder()
+                .setCustomId("successSell")
+                .setLabel("Negociação concluída")
+                .setEmoji("<:SupIcon:1204157952349442099>") 
+                .setStyle(Discord.ButtonStyle.Primary),
     
             );
 
