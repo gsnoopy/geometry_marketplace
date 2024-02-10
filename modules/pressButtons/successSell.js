@@ -1,6 +1,6 @@
-const Discord = require("discord.js");
-const fs = require('fs');
-const path = require('path');
+const Discord = require("discord.js");  
+
+const { transcriptMessages } = require('../../logs/transcriptMessages')
 
 async function successSell(interaction) {
 
@@ -13,43 +13,10 @@ async function successSell(interaction) {
                 await interaction.deferReply({ ephemeral: true });
                 const channel = interaction.channel;
                 interaction.editReply({content: "Negociação concluída, o canal será fechado em 10 segundos!"})
-
-                const formatDateTime = (dateTime) => {
-                    dateTime.setHours(dateTime.getHours() - 3);
-                    return dateTime.toLocaleString('pt-BR', { timeZone: 'UTC' });
-                };
-
-                const tempFolderPath = path.join(__dirname, '../../temp');
-
-                if (!fs.existsSync(tempFolderPath)) {
-                    fs.mkdirSync(tempFolderPath, { recursive: true });
-                }
-
-                const transcriptFileName = `transcript_${channel.id}.txt`;
-                const transcriptFilePath = path.join(tempFolderPath, transcriptFileName);
-
-                fs.writeFileSync(transcriptFilePath, '');
-
-                await channel.messages.fetch({limit: 100}).then(messages => {
-                    messages.forEach(message => {
-                        const formattedDateTime = formatDateTime(message.createdAt);
-                        const line = `${formattedDateTime} - ${message.author.username}: ${message.content}\n`;
-                        fs.appendFileSync(transcriptFilePath, line);
-                    });
-                });
-
-                const transcriptChannel = interaction.guild.channels.cache.get('1205498915252731984');
-                if (transcriptChannel) {
-                    await transcriptChannel.send({ files: [transcriptFilePath] });
-                }
-
-                fs.unlinkSync(transcriptFilePath);
-
-                setTimeout(async () => {
-                    await channel.delete();
-                }, 10000);
                 
-        
+                await transcriptMessages(interaction,channel);
+                
+    
             } catch (error) {
         
                 console.error('Erro ao processar botão "successSell":', error);
