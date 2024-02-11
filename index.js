@@ -18,6 +18,7 @@ const { createEditProfile } = require('./modules/createModals/createEditProfile'
 const { createAd } = require('./modules/createModals/createAd');
 const { createAddSaldo } = require('./modules/createModals/createAddSaldo');
 const { createDeleteAd } = require('./modules/createModals/createDeleteAd');
+const { craeteTicket, createTicket } = require('./modules/createModals/createTicket');
 
 const { submitSignUp } = require('./modules/submitModals/submitSignUp');
 const { submitEditProfile } = require('./modules/submitModals/submitEditProfile');
@@ -73,6 +74,7 @@ client.on('interactionCreate', (interaction) => {
     createEditProfile(interaction);
     createAddSaldo(interaction);
     createDeleteAd(interaction);
+    createTicket(interaction);
     seeProfile(interaction);
     buyAd(interaction);
     bePremium(interaction);
