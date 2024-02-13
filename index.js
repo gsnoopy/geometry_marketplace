@@ -18,7 +18,7 @@ const { createEditProfile } = require('./modules/createModals/createEditProfile'
 const { createAd } = require('./modules/createModals/createAd');
 const { createAddSaldo } = require('./modules/createModals/createAddSaldo');
 const { createDeleteAd } = require('./modules/createModals/createDeleteAd');
-const { craeteTicket, createTicket } = require('./modules/createModals/createTicket');
+const { createTicket } = require('./modules/createModals/createTicket');
 
 const { submitSignUp } = require('./modules/submitModals/submitSignUp');
 const { submitEditProfile } = require('./modules/submitModals/submitEditProfile');
@@ -26,6 +26,7 @@ const { submitAddSaldo } = require('./modules/submitModals/submitAddSaldo');
 const { submitAd } = require('./modules/submitModals/submitAd');
 const { submitAdPremium } = require('./modules/submitModals/submitAdPremium');
 const { submitDeleteAd } = require('./modules/submitModals/submitDeleteAd');
+const { submitTicket } = require('./modules/submitModals/submitTicket');
 
 const { seeProfile } = require('./modules/pressButtons/seeProfile');
 const { buyAd } = require('./modules/pressButtons/buyAd'); 
@@ -90,6 +91,7 @@ client.on('interactionCreate', (interaction) => {
     submitAd(interaction);
     submitAdPremium(interaction);
     submitDeleteAd(interaction);
+    submitTicket(interaction);
   }
 
     if (interaction.isStringSelectMenu()) {
