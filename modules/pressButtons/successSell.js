@@ -14,7 +14,7 @@ async function successSell(interaction) {
                 const channel = interaction.channel;
                 interaction.editReply({content: "Negociação concluída, o canal será fechado em 10 segundos!"})
                 
-                await transcriptMessages(interaction,channel);
+                await transcriptMessages(interaction,channel,'1205498915252731984');
                 
     
             } catch (error) {

@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-async function transcriptMessages(interaction,channel){
+async function transcriptMessages(interaction,channel,id){
 
     const formatDateTime = (dateTime) => {
         dateTime.setHours(dateTime.getHours() - 3);
@@ -27,7 +27,7 @@ async function transcriptMessages(interaction,channel){
         });
     });
     
-    const transcriptChannel = interaction.guild.channels.cache.get('1205498915252731984');
+    const transcriptChannel = interaction.guild.channels.cache.get(`${id}`);
     if (transcriptChannel) {
         await transcriptChannel.send({ files: [transcriptFilePath] });
     }

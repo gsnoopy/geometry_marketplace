@@ -48,13 +48,21 @@ async function submitTicket(interaction,client) {
           
           const stringMarkdow = "`";
           
-          let embed = new Discord.EmbedBuilder()
+          const embed = new Discord.EmbedBuilder()
           .setTitle(`Olá <@${interaction.user.id}>`)
           .setColor(0x004CFF)
           .setDescription(`Sua dúvida: ${stringMarkdow}${question}${stringMarkdow}`)
           .setTimestamp()
 
-          await channel.send(({ embeds: [embed]}));
+          const button = new Discord.ActionRowBuilder().addComponents(
+            new Discord.ButtonBuilder()
+            .setCustomId("deleteTicket")
+            .setLabel("X")
+            .setEmoji("<:signUp:1199292028165574767>") 
+            .setStyle(Discord.ButtonStyle.Primary),
+        );
+
+          await channel.send(({ embeds: [embed], components: [button]}));
 
         interaction.editReply({ content: `Ticket criado em <#${channel}>!`, ephemeral: true });
 

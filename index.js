@@ -34,6 +34,7 @@ const { bePremium } = require('./modules/pressButtons/bePremium');
 const { confirmPremium } = require('./modules/pressButtons/confirmPremium');
 const { confirmBoost } = require('./modules/pressButtons/confirmBoost');
 const { successSell } = require('./modules/pressButtons/successSell');
+const { deleteTicket } = require('./modules/pressButtons/deleteTicket');
 
 const { verifyPayment } = require('./scripts/verifyPayment');
 const { verifyPremiums } = require('./scripts/verifyPremiums');
@@ -82,6 +83,7 @@ client.on('interactionCreate', (interaction) => {
     confirmPremium(interaction,client);
     confirmBoost(interaction);
     successSell(interaction);
+    deleteTicket(interaction);
   }
 
   if (interaction.isModalSubmit()){
