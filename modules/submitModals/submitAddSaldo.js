@@ -112,14 +112,19 @@ async function submitAddSaldo(interaction) {
         .setDescription(`Você desejou adicionar o saldo: ** ${transactionAmount} **\nRealize o pagamento através do QR Code para continuar, caso esteja no celular, clique no botão abaixo para ser direcionado ao Mercado Pago`)
         .setThumbnail('attachment://qrcode.png');
 
-      const button = new ActionRowBuilder().addComponents(
-        new ButtonBuilder()
+      const buttons = new ActionRowBuilder().addComponents(
+        new Discord.ButtonBuilder()
           .setLabel('PIX Ticket')
           .setURL(`${ticketUrl}`)
-          .setStyle(ButtonStyle.Link)
+          .setStyle(ButtonStyle.Link),
+        new Discord.ButtonBuilder()
+          .setCustomId("deleteTicketSaldo")
+          .setLabel("X")
+          .setEmoji("<:signUp:1199292028165574767>") 
+          .setStyle(Discord.ButtonStyle.Primary),
       );
 
-      channel.send({ embeds: [embed], components: [button], files: [file] })
+      channel.send({ embeds: [embed], components: [buttons], files: [file] })
 
       interaction.editReply({ 
         content: `Seu ticket para adicionar saldo foi aberto no canal: ${channel}!`, 

@@ -35,6 +35,7 @@ const { confirmPremium } = require('./modules/pressButtons/confirmPremium');
 const { confirmBoost } = require('./modules/pressButtons/confirmBoost');
 const { successSell } = require('./modules/pressButtons/successSell');
 const { deleteTicket } = require('./modules/pressButtons/deleteTicket');
+const { deleteTicketSaldo } = require('./modules/pressButtons/deleteTicketSaldo');
 
 const { verifyPayment } = require('./scripts/verifyPayment');
 const { verifyPremiums } = require('./scripts/verifyPremiums');
@@ -84,6 +85,7 @@ client.on('interactionCreate', (interaction) => {
     confirmBoost(interaction);
     successSell(interaction);
     deleteTicket(interaction);
+    deleteTicketSaldo(interaction);
   }
 
   if (interaction.isModalSubmit()){
