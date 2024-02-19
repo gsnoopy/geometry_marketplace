@@ -7,8 +7,9 @@ const { registerTransactionAd } = require('../../database/create/registerTransac
 const { confirmBuy } = require('./confirmBuy');
 const { updateUserSaldo } = require('../../database/edit/updateUserSaldo');
 const { deleteAdById } = require('../../database/delete/deleteAdById');
+const { createLog } = require('../../logs/createLog');
 
-async function buyAd(interaction) {
+async function buyAd(interaction, client) {
   try {
     if (interaction.customId === 'buyAd') {
       await interaction.deferReply({ ephemeral: true });
@@ -117,10 +118,18 @@ async function buyAd(interaction) {
             );
 
             await channel.send(({ embeds: [embed], components: [buttons] }));
-            await interaction.followUp({ content: 'Compra confirmada!', ephemeral: true });
 
+            let embedLog = new Discord.EmbedBuilder()
+            .setTitle(`${title}`)
+            .setColor(0xA331FF)
+            .setDescription(`<@${interaction.user.id}> comprou um produto de <@${seller_id}>\n\n**Valor**: R$ ${saldoAd} \n **Saldo Retido:** R$ ${saldo_retido}\n**Taxa**: R$ ${taxa}`)
+            .setTimestamp()
+  
+            await createLog(client, '1204476132406075452', embedLog)
+            
+            await interaction.editReply({ content: 'Compra confirmada!', ephemeral: true });
           } else {
-            await interaction.followUp({ content: 'Compra cancelada.', ephemeral: true });
+            await interaction.editReply({ content: 'Compra cancelada.', ephemeral: true });
           }
         } else {
           await interaction.editReply({ content: 'Você não possui saldo suficiente', ephemeral: true });

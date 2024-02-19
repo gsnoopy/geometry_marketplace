@@ -48,16 +48,16 @@ client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
 
   setInterval(() => {
-    //verifyPayment(db, client);
+    verifyPayment(db, client);
   }, 7000);
 
   setInterval(() => {
-    //verifyPremiums(db, client);
-  }, 3600000);
+    verifyPremiums(db, client);
+  }, 7000);
 
   setInterval(() => {
-    //verifyAds(db, client);
-  }, 5000);
+    verifyAds(db, client);
+  }, 7000);
 
 });
 
@@ -80,10 +80,10 @@ client.on('interactionCreate', (interaction) => {
     createDeleteAd(interaction);
     createTicket(interaction);
     seeProfile(interaction);
-    buyAd(interaction);
+    buyAd(interaction, client);
     bePremium(interaction);
     confirmPremium(interaction,client);
-    confirmBoost(interaction);
+    confirmBoost(interaction, client);
     successSell(interaction);
     deleteTicket(interaction);
     deleteTicketSaldo(interaction);

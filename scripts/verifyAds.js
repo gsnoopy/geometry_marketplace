@@ -2,8 +2,10 @@ const db = require('../database');
 const { getUserById } = require('../database/read/getUserById');
 const { updateUserSaldo } = require('../database/edit/updateUserSaldo');
 const { registerSale } = require('../database/create/registerSale');
+const { createLog } = require('../logs/createLog');
+const { Discord } = require('../imports');
 
-async function verifyAds() {
+async function verifyAds(db, client) {
   try {
     const result = await db.query('SELECT * FROM transactions_anuncio');
 
@@ -16,7 +18,7 @@ async function verifyAds() {
       const diffInDays = Math.floor((currentDate - transactionDatetime) / (1000 * 60 * 60 * 24)) + 1;
     
       console.log(diffInDays);
-      if (diffInDays >= 0) {
+      if (diffInDays >= 1) {
         const user = await getUserById(seller_id);
         console.log(user.saldo)
         console.log(saldo_retido)
@@ -27,6 +29,13 @@ async function verifyAds() {
         await registerSale(buyer_id,seller_id,categoria_id,taxa,revenue)
         await db.query('DELETE FROM transactions_anuncio WHERE transaction_id = $1', [transaction_id]);
         console.log(`Transação ${transaction_id} processada. Saldo retido adicionado ao saldo do usuário.`);
+
+        let embed = new Discord.EmbedBuilder()
+        .setColor(0x00F4FF)
+        .setDescription(`R$ ${saldo_retido} processado para <@${user.user_id}>`)
+        .setTimestamp()
+
+        await createLog(client, '1204476284529287258', embed)
       }
     }
   } catch (error) {

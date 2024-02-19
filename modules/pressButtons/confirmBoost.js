@@ -1,10 +1,10 @@
 const { getUserById } = require('../../database/read/getUserById');
 const { updateUserSaldo } = require('../../database/edit/updateUserSaldo');
 const { registerSale } = require('../../database/create/registerSale');
+const { createLog } = require('../../logs/createLog');
+const { Discord } = require('../../imports');
 
-
-
-async function confirmBoost(interaction) {
+async function confirmBoost(interaction, client) {
   try {
 
     if (interaction.customId === 'confirmEveryone') {
@@ -18,6 +18,14 @@ async function confirmBoost(interaction) {
       await registerSale(interaction.user.id,'Geometry Marketplace','11',process.env.EVERYONE_PRICE,revenue)
 
       interaction.channel.send('@everyone')
+
+      let embedEveryone = new Discord.EmbedBuilder()
+      .setColor(0xFF8328)
+      .setDescription(`<@${interaction.user.id}> deu um **everyone** boost`)
+      .setTimestamp()
+
+      await createLog(client, '1204476834155077692', embedEveryone)
+
       interaction.editReply({content: 'Notificação enviada para todos.', ephemeral: false })
         
 
@@ -35,6 +43,14 @@ async function confirmBoost(interaction) {
         await registerSale(interaction.user.id,'Geometry Marketplace','12',process.env.HERE_PRICE,revenue)
   
         interaction.channel.send('@here')
+
+        let embedHere = new Discord.EmbedBuilder()
+        .setColor(0xF0FF47)
+        .setDescription(`<@${interaction.user.id}> deu um **here** boost`)
+        .setTimestamp()
+  
+        await createLog(client, '1204476834155077692', embedHere)
+
         interaction.editReply({content: 'Notificação enviada para todos os onlines.', ephemeral: false })
 
     }

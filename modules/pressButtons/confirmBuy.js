@@ -26,9 +26,12 @@ async function confirmBuy(interaction, existingAd, user, saldo, saldoFinal) {
         // Resolve ou rejeita com base na escolha do usuário
         if (i.customId === 'confirmBuy') {
           
+          await interaction.editReply({ content: `Aguarde o processamento`, components: [], ephemeral: true });
 
           resolve(true);
+
         } else {
+          await interaction.editReply({ content: `Compra recusada`, components: [],  ephemeral: true });
           resolve(false);
         }
       });
