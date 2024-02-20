@@ -1,9 +1,11 @@
 const db = require('../../database');
 
 async function updateAd(messageId, newMessageId) {
+
   const client = await db.query('BEGIN');
 
   try {
+
     const updateAdQuery = `
       UPDATE anuncios
       SET message_id = $1
@@ -11,11 +13,13 @@ async function updateAd(messageId, newMessageId) {
     `;
 
     await db.query(updateAdQuery, [newMessageId, messageId]);
-
     await db.query('COMMIT');
+
   } catch (error) {
+
     await db.query('ROLLBACK');
     throw error;
+    
   }
 }
 

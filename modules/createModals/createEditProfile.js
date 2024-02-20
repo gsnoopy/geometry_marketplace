@@ -1,7 +1,9 @@
 const { ActionRowBuilder, ModalBuilder, TextInputBuilder, TextInputStyle } = require('../../imports');
 
 function createEditProfile(interaction) {
+
     if (interaction.customId === 'editProfile') {
+
         const modal = new ModalBuilder()
             .setCustomId('editProfileModal')
             .setTitle(`Insira conteúdo no campo que deseja editar.`);
@@ -33,6 +35,7 @@ function createEditProfile(interaction) {
         modal.addComponents(fourthActionrOW);
 
         interaction.showModal(modal);
+        
     }
 }
   

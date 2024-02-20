@@ -42,8 +42,6 @@ const { verifyPayment } = require('./scripts/verifyPayment');
 const { verifyPremiums } = require('./scripts/verifyPremiums');
 const { verifyAds } = require('./scripts/verifyAds');
 
-
-
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
 
@@ -74,6 +72,7 @@ client.on('interactionCreate', (interaction) => {
   }
 
   if(interaction.isButton()){
+
     createSignUp(interaction);
     createEditProfile(interaction);
     createAddSaldo(interaction);
@@ -88,9 +87,11 @@ client.on('interactionCreate', (interaction) => {
     deleteTicket(interaction);
     deleteTicketSaldo(interaction);
     upAd(interaction);
+
   }
 
   if (interaction.isModalSubmit()){
+
     submitSignUp(interaction,client);
     submitEditProfile(interaction);
     submitAddSaldo(interaction);
@@ -98,6 +99,7 @@ client.on('interactionCreate', (interaction) => {
     submitAdPremium(interaction);
     submitDeleteAd(interaction);
     submitTicket(interaction);
+
   }
 
     if (interaction.isStringSelectMenu()) {
@@ -105,10 +107,10 @@ client.on('interactionCreate', (interaction) => {
       const selectedOptions = interaction.values;
       interaction.client.tempData = { adModalOptions: selectedOptions }
       createAd(interaction);
+
     }
 
 });
 
 client.login(process.env.BOT_TOKEN);
-
 module.exports = client;

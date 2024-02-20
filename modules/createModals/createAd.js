@@ -2,6 +2,7 @@ const { ActionRowBuilder, ModalBuilder, TextInputBuilder, TextInputStyle } = req
 const { getAdByUser } = require("../../database/read/getAdByUser");
 
 async function createAd(interaction) {
+
     if (interaction.customId === 'ad_options') {
 
         const ads = await getAdByUser(interaction.user.id);
@@ -9,7 +10,7 @@ async function createAd(interaction) {
         if (ads.length >= 2) {
             
             await interaction.deferReply({ ephemeral: true });
-            interaction.editReply({content: "Você já atingiu o limite máximo de anúncios", ephemeral: true})
+            interaction.editReply({content: "Você já atingiu o limite máximo de anúncios", ephemeral: true});
 
           }else {
 
@@ -62,6 +63,7 @@ async function createAd(interaction) {
             modal.addComponents(fifthActionRow);
 
             interaction.showModal(modal);
+            
         }
     }
 }

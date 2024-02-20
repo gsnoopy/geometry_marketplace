@@ -3,11 +3,14 @@ const qrcode = require('qrcode');
 const fs = require('fs');
 const { AttachmentBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { Discord } = require('../../imports');
+
 const { getUserById } = require('../../database/read/getUserById');
 const { registerTransactionSaldo } = require('../../database/create/registerTransactionSaldo');
 
 async function submitAddSaldo(interaction) {
+
   try {
+
     if (interaction.customId === 'saldoModal') {
 
       const channelName = `🧌﹒saldo﹒${interaction.user.username}`;
@@ -15,13 +18,16 @@ async function submitAddSaldo(interaction) {
       const existingChannel = interaction.guild.channels.cache.find(c => c.name === channelName);
 
       if (existingChannel) {
+
         return interaction.reply({ 
           content: `Você já possui um ticket aberto em ${existingChannel}!`, 
           ephemeral: true 
         });
+
       }
     
       const channel = await interaction.guild.channels.create({
+
         name: channelName,
         type: Discord.ChannelType.GuildText,
         parent: category,
@@ -43,6 +49,7 @@ async function submitAddSaldo(interaction) {
             ]
           }
         ]
+
       });
       
       interaction.reply({ 
@@ -52,8 +59,10 @@ async function submitAddSaldo(interaction) {
 
       const valorString = interaction.fields.getTextInputValue('valorInput');
       const valor = Number(valorString.replace(',', '.')).toFixed(2);  
+
       const userId = interaction.user.id;
       const usuarioEncontrado = await getUserById(userId);
+
       const channelId = channel.id;
 
       const transactionAmount = Number(valor);
@@ -90,13 +99,19 @@ async function submitAddSaldo(interaction) {
       const ticketUrl = response.data.point_of_interaction.transaction_data.ticket_url;
 
       async function generateQRCode(pixKey) {
+
         try {
+
           const qrCodeDataUrl = await qrcode.toDataURL(pixKey);
           const base64Data = qrCodeDataUrl.replace(/^data:image\/png;base64,/, '');
           const qrCodeBuffer = Buffer.from(base64Data, 'base64');
+
           fs.writeFileSync('./temp/qrcode.png', qrCodeBuffer);
+
         } catch (err) {
+
           console.error('Erro ao gerar o QR code:', err);
+
         }
       }
 
@@ -133,7 +148,9 @@ async function submitAddSaldo(interaction) {
 
     }
   } catch (error) {
-    console.error('Erro ao processar transação:', error);
+
+    console.error('Erro ao processar transação: submitAddSaldo', error);
+
   }
 }
 

@@ -11,7 +11,9 @@ async function transcriptMessages(interaction,channel,id){
     const tempFolderPath = path.join(__dirname, '../../temp');
     
     if (!fs.existsSync(tempFolderPath)) {
+
         fs.mkdirSync(tempFolderPath, { recursive: true });
+
     }
     
     const transcriptFileName = `transcript_${channel.id}.txt`;
@@ -28,8 +30,11 @@ async function transcriptMessages(interaction,channel,id){
     });
     
     const transcriptChannel = interaction.guild.channels.cache.get(`${id}`);
+
     if (transcriptChannel) {
+
         await transcriptChannel.send({ files: [transcriptFilePath] });
+        
     }
     
     fs.unlinkSync(transcriptFilePath);

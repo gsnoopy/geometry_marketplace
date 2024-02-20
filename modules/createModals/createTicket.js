@@ -1,7 +1,9 @@
 const { ActionRowBuilder, ModalBuilder, TextInputBuilder, TextInputStyle } = require('../../imports');
 
 function createTicket(interaction) {
+
     if (interaction.customId === 'ticket') {
+
         const modal = new ModalBuilder()
             .setCustomId('ticketModal')
             .setTitle(`Formulario para Suporte`);
@@ -16,8 +18,8 @@ function createTicket(interaction) {
 
         modal.addComponents(firstActionRow);
 
-
         interaction.showModal(modal);
+        
     }
 }
   

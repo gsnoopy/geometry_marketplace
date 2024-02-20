@@ -8,14 +8,19 @@ async function createSignUp(interaction) {
         const user = await getUserById(interaction.user.id);
 
         if(user){
+
             try{
+
                 await interaction.deferReply({ephemeral: true});
                 const idRoleUser = '1202537759336570901'
                 await interaction.member.roles.add(idRoleUser);
                 interaction.editReply({content: "Você já é cadastrado",ephemeral:true})
+
             }catch(error){
+
                 console.error('Erro ao adicionar o cargo:', error);
                 await interaction.editReply({ content: 'Ocorreu um erro ao adicionar o cargo.', ephemeral: true });
+
             }
 
         }else{  
@@ -57,7 +62,6 @@ async function createSignUp(interaction) {
             interaction.showModal(modal);
 
         }
-
     }
 }
   

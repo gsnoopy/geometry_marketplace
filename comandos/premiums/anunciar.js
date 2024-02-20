@@ -9,12 +9,15 @@ module.exports = {
 
   run: async (client, interaction) => {
 
-    const targetRoleId = '1200973836024287293'
-
+    const premiumRole = process.env.PREMIUM_ID;
+    
     try{
-        if (!interaction.member.roles.cache.has(targetRoleId)) {
-          interaction.reply({ content: `Você não possui permissão para utilzar este comando!`, ephemeral: true })
-      } else {
+
+        if (!interaction.member.roles.cache.has(premiumRole)) {
+
+            interaction.reply({ content: `Você não possui permissão para utilzar este comando!`, ephemeral: true });
+
+        } else {
 
             const modal = new ModalBuilder()
                 .setCustomId('adModalPremium')
@@ -68,9 +71,8 @@ module.exports = {
     }catch(error){
 
       console.error('Erro ao processar comando "anunciar":', error);
-      await interaction.reply({ content: "Erro ao processar o comando.", ephemeral: true });
+      await interaction.reply({ content: "Erro ao processar o comando anunciar.", ephemeral: true });
 
     }
-
-  },
+  }
 }
