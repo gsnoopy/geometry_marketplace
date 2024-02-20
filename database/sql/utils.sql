@@ -7,7 +7,7 @@ INSERT INTO categorias (name, channel_id) VALUES
   ('premium', '0');
 
 DELETE FROM users
-WHERE user_id = 'id_do_usuario';
+WHERE user_id = '901152615864340561';
 
 UPDATE users
 SET saldo = saldo + 50

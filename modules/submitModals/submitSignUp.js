@@ -1,6 +1,9 @@
-const { registerUser } = require('../../database/create/registerUser');
-const { createLog } = require('../../logs/createLog');
 const { Discord } = require('../../imports');
+
+const { registerUser } = require('../../database/create/registerUser');
+const { getCupons } = require('../../database/read/getCupons');
+const { updateCupomUsages } = require('../../database/edit/updateCupomUsages');
+const { createLog } = require('../../logs/createLog');
 
 async function submitSignUp(interaction,client) {
 
@@ -8,16 +11,23 @@ async function submitSignUp(interaction,client) {
 
     if (interaction.customId === 'signUpModal') {
 
-      interaction.deferReply({ ephemeral: true }) 
+      interaction.deferReply({ ephemeral: true })
       
       const name = interaction.fields.getTextInputValue('nameInput');
       const email = interaction.fields.getTextInputValue('emailInput');
       const pix = interaction.fields.getTextInputValue('pixInput');
-      const cupom = interaction.fields.getTextInputValue('indicacaoInput');
+      const cupom = interaction.fields.getTextInputValue('indicacaoInput').toLowerCase();
       const userID = interaction.user.id;
-      const saldo = 0.0;
-
       const userRole = process.env.USER_ID;
+      let saldo = 0.0;
+
+      const cupons = await getCupons()
+      const cupomExists = cupons.find(c => c.nome.toLowerCase() === cupom)
+
+      if (cupomExists) {
+        saldo = 1.0;
+        await updateCupomUsages(cupomExists.nome);
+      }
 
       await registerUser(name, email, pix, userID, saldo, cupom);
       await interaction.member.roles.add(userRole);
@@ -34,7 +44,7 @@ async function submitSignUp(interaction,client) {
   } catch (error) {
 
     console.error('Erro ao cadastrar usuário:', error);
-    interaction.reply({ content: "Erro ao realizar o cadastro.", ephemeral: true });
+    interaction.editReply({ content: "Erro ao realizar o cadastro.", ephemeral: true });
 
   }
 }
