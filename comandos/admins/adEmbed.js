@@ -15,6 +15,7 @@ module.exports = {
 
         let embed = new Discord.EmbedBuilder()
         .setColor(0x020202)
+        .setImage("https://media.discordapp.net/attachments/1204152785831206964/1209760048511975434/announcement.png?ex=65e817d7&is=65d5a2d7&hm=21a0aa5f47b82b49297258a800b4b8ae5617fb5ce13899d8aed540d3a9e4083a&=&format=webp&quality=lossless&width=1626&height=574")
         .setDescription("Criar anúncio");
         
         let painel = new Discord.ActionRowBuilder().addComponents(

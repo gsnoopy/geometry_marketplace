@@ -15,13 +15,14 @@ module.exports = {
 
       let embed = new Discord.EmbedBuilder()
         .setColor(0x020202)
+        .setImage("https://media.discordapp.net/attachments/1204152785831206964/1209760048272908318/signUp.png?ex=65e817d7&is=65d5a2d7&hm=5bc2df6811912b0b342c7efcf176a2cfc5c6e3537700e78c581e06cbbe3e9f4f&=&format=webp&quality=lossless&width=1626&height=584")
         .setDescription("Sign Up Embed")
         
       const button = new Discord.ActionRowBuilder().addComponents(
           new Discord.ButtonBuilder()
             .setCustomId("signup")
             .setLabel("Cadastrar-se")
-            .setEmoji("<:signUp:1199292028165574767>") 
+            .setEmoji("<:signUp:1199292028165574767>")
             .setStyle(Discord.ButtonStyle.Primary),
       );
 

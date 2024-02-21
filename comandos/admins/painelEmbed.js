@@ -15,6 +15,7 @@ module.exports = {
 
       let embed = new Discord.EmbedBuilder()
         .setColor(0x020202)
+        .setImage("https://media.discordapp.net/attachments/1204152785831206964/1209911425628119140/userInterface.png?ex=65e8a4d2&is=65d62fd2&hm=8911cec0080b4759cabf165763336096ba4733637e8b58e278a51219a470caff&=&format=webp&quality=lossless&width=1626&height=574")
         .setDescription("Interface Embed")
         
       const row1 = new Discord.ActionRowBuilder().addComponents(

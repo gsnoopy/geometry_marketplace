@@ -92,6 +92,7 @@ async function buyAd(interaction, client) {
             const embed = new Discord.EmbedBuilder()
               .setColor(0x020202)
               .setTitle(`Venda e compra do produto [${existingAd.title}]`)
+              .setImage("https://media.discordapp.net/attachments/1204152785831206964/1209760049342185502/negociation.png?ex=65e817d8&is=65d5a2d8&hm=fc04dc888fe872fe595a0bba4d4cb56b4cf11e01b960acedcb968f29066fddb8&=&format=webp&quality=lossless&width=1626&height=574")
               .setThumbnail("https://media.discordapp.net/attachments/1204152785831206964/1204152957290029136/Frame.png?ex=65d3b1d5&is=65c13cd5&hm=e7ccf81359ce86076bcbada80551d08a420061d46232eded4793ff53472fd3f3&=&format=webp&quality=lossless&width=200&height=200")
               .setDescription(`Dados pré cadastrados pelo vendedor:\n\n${stringMarkdow}${existingAd.information}${stringMarkdow}\n\nEste é um bate-papo entre:\n`)
               .addFields(
