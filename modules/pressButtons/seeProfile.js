@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 
 const { getAdByUser } = require("../../database/read/getAdByUser");
 const { getUserById } = require('../../database/read/getUserById');
+const { getSaldoRetido } = require("../../database/read/getSaldoRetido");
 
 async function seeProfile(interaction) {
 
@@ -13,7 +14,8 @@ async function seeProfile(interaction) {
     
       const user = await getUserById(interaction.user.id);
       const announcementsData = await getAdByUser(interaction.user.id);
-    
+      const saldoRetido = await getSaldoRetido(interaction.user.id);
+
       if (user) {
     
         const userId = interaction.user.id;
@@ -36,6 +38,7 @@ async function seeProfile(interaction) {
             { name: '<:mailProfile:1199292107035262996> Email:', value: userEmail},
             { name: '<:pixKey:1199292080145584191> Chave PIX:', value: userKey},
             { name: '<:ProfileSaldo:1199292067734630500> Saldo:', value: userBalance},
+            { name: '<:ProfileSaldo:1199292067734630500> Saldo bloqueado:', value: saldoRetido},
             { name: '<:cupomProfile:1199292242649690153> Indicado por:', value: userInvitedBy},
           )
           .setTimestamp()
