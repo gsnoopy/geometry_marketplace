@@ -1,9 +1,10 @@
 const Discord = require("discord.js")
-const { registerCupom } = require("../../database/create/registerCupom");
+
+const { updateCupomToZero } = require("../../database/edit/updateCupomToZero");
 
 module.exports = {
-  name: "criar_cupom",
-  description: "[ADM] Criar cupom no banco de dados",
+  name: "reset_cupom",
+  description: "[ADM] Resetar usos de um cupom no banco de dados",
   type: Discord.ApplicationCommandType.ChatInput,
   options: [
     {
@@ -21,12 +22,12 @@ module.exports = {
 
     } else {
 
-      await interaction.deferReply({ephemeral: true});
+        await interaction.deferReply({ephemeral: true});
 
-      const nameString = interaction.options.getString("nome");
-      await registerCupom(nameString);
-
-      interaction.editReply({content: `Cupom **${nameString}** cadastrado`, ephemeral: true});
+        const nameString = interaction.options.getString("nome"); 
+        await updateCupomToZero(nameString);
+      
+        interaction.editReply({content: `Cupom **${nameString}** resetado.`, ephemeral: true});
 
     }
   }
