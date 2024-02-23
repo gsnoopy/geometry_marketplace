@@ -41,7 +41,7 @@ module.exports = {
             { name: '<:mailProfile:1199292107035262996> Email:', value: userEmail},
             { name: '<:pixKey:1199292080145584191> Chave PIX:', value: userKey},
             { name: '<:ProfileSaldo:1199292067734630500> Saldo:', value: userSaldo},
-            { name: '<:ProfileSaldo:1199292067734630500> Saldo bloqueado:', value: saldoRetido},
+            { name: '<:ProfileSaldo:1199292067734630500> Saldo bloqueado:', value: String(saldoRetido)},
             { name: '<:cupomProfile:1199292242649690153> Indicado por:', value: userInvitedBy},
           )
           .setTimestamp()

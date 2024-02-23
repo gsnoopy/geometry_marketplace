@@ -18,7 +18,7 @@ async function confirmBoost(interaction, client) {
       const revenue = (process.env.EVERYONE_PRICE - (process.env.EVERYONE_PRICE * 0.01)).toFixed(2);
 
       await updateUserSaldo(interaction.user.id, saldo_final);
-      await registerSale(interaction.user.id,'Geometry Marketplace','11',process.env.EVERYONE_PRICE,revenue);
+      await registerSale(interaction.user.id,'Geometry Marketplace','10',process.env.EVERYONE_PRICE,revenue);
 
       interaction.channel.send('@everyone');
 
@@ -42,7 +42,7 @@ async function confirmBoost(interaction, client) {
         const revenue = (process.env.HERE_PRICE - (process.env.HERE_PRICE * 0.01)).toFixed(2);
   
         await updateUserSaldo(interaction.user.id, saldo_final);
-        await registerSale(interaction.user.id,'Geometry Marketplace','12',process.env.HERE_PRICE,revenue);
+        await registerSale(interaction.user.id,'Geometry Marketplace','11',process.env.HERE_PRICE,revenue);
   
         interaction.channel.send('@here');
 

@@ -1,6 +1,7 @@
 CREATE TABLE users (
   user_id VARCHAR(255) PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
+  username VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL,
   pix VARCHAR(255),
   saldo DECIMAL(10, 2) DEFAULT 0.0,

@@ -24,8 +24,18 @@ module.exports = {
             .setPlaceholder("Selecione a categoria do anúncio")
             .addOptions(
                 {
-                    label: "League of Legends",
-                    value: "lol_option",
+                    label: "League of Legends - Smurf",
+                    value: "lol_smurf",
+                    emoji: "<:LolIcon:1199983426783154176>"
+                },
+                {
+                    label: "League of Legends - Handlevel",
+                    value: "lol_handlevel",
+                    emoji: "<:LolIcon:1199983426783154176>"
+                },
+                {
+                    label: "League of Legends - Outros",
+                    value: "lol_outros",
                     emoji: "<:LolIcon:1199983426783154176>"
                 },
                 {
@@ -47,6 +57,11 @@ module.exports = {
                     label: "Keys",
                     value: "keys_option",
                     emoji: "<:KeyIcon:1199980188159705188>"
+                },
+                {
+                    label: "Serviços",
+                    value: "services_option",
+                    emoji: "<:servicesIcon:1210607764129189990>"
                 }
             )
         );

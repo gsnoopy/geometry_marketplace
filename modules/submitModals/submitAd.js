@@ -15,25 +15,37 @@ async function submitAd(interaction) {
       let id_category;
 
       switch (selectedOption) {
-        case 'lol_option':
+        case 'lol_smurf':
           id_channel = '1198197653062811668';
           id_category = 1
           break;
+        case 'lol_handlevel':
+          id_channel = '1210596773836361728';
+           id_category = 2
+          break;
+        case 'lol_outros':
+          id_channel = '1210596921392111677';
+          id_category = 3
+          break;          
         case 'valorant_option':
           id_channel = '1198197771904233534';
-          id_category = 2
+          id_category = 4
           break;
         case 'fortnite_option':
           id_channel = '1198197670850867290';
-          id_category = 3
+          id_category = 5
           break;
         case 'steam_option':
           id_channel = '1198197740526645248';
-          id_category = 4
+          id_category = 6
           break;
         case 'keys_option':
-          id_channel = '1198197704862478336';
-          id_category = 5
+          id_channel = '1210597175202021426';
+          id_category = 7
+          break;
+        case 'services_option':
+          id_channel = '1210597201894445157';
+          id_category = 8
           break;
         }
 

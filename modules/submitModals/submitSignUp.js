@@ -20,6 +20,7 @@ async function submitSignUp(interaction,client) {
       const userID = interaction.user.id;
       const userRole = process.env.USER_ID;
       let saldo = 0.0;
+      const userDiscordName = interaction.user.tag;
 
       const cupons = await getCupons()
       const cupomExists = cupons.find(c => c.nome.toLowerCase() === cupom)
@@ -29,7 +30,7 @@ async function submitSignUp(interaction,client) {
         await updateCupomUsages(cupomExists.nome);
       }
 
-      await registerUser(name, email, pix, userID, saldo, cupom);
+      await registerUser(name, userDiscordName, email, pix, userID, saldo, cupom);
       await interaction.member.roles.add(userRole);
         
       let embed = new Discord.EmbedBuilder()

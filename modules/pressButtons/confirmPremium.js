@@ -59,7 +59,7 @@ async function confirmPremium(interaction,client) {
 
       await updateUserSaldo(user.id, updatedSaldo);
       await registerPremium(user.id);
-      await registerSale(user.id,'Geometry Marketplace',13,premiumPrice,revenue);
+      await registerSale(user.id,'Geometry Marketplace',9,premiumPrice,revenue);
 
       let embed = new Discord.EmbedBuilder()
         .setColor(0xF900FF)
