@@ -5,13 +5,15 @@ const { getCupons } = require('../../database/read/getCupons');
 const { updateCupomUsages } = require('../../database/edit/updateCupomUsages');
 const { createLog } = require('../../logs/createLog');
 
+const { validEmail } = require('../../utils/validEmail');
+
 async function submitSignUp(interaction,client) {
 
   try {
 
     if (interaction.customId === 'signUpModal') {
 
-      interaction.deferReply({ ephemeral: true })
+      await interaction.deferReply({ ephemeral: true })
       
       const name = interaction.fields.getTextInputValue('nameInput');
       const email = interaction.fields.getTextInputValue('emailInput');
@@ -21,6 +23,11 @@ async function submitSignUp(interaction,client) {
       const userRole = process.env.USER_ID;
       let saldo = 0.0;
       const userDiscordName = interaction.user.tag;
+
+      if(validEmail(email) == false){
+        interaction.editReply({ content: "Insira um email válido!", ephemeral: true });
+        return
+      }
 
       const cupons = await getCupons()
       const cupomExists = cupons.find(c => c.nome.toLowerCase() === cupom)
