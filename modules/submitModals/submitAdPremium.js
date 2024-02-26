@@ -8,16 +8,27 @@ async function submitAdPremium(interaction) {
 
     if (interaction.customId === 'adModalPremium') {
 
-        interaction.deferReply({ content: "Aguarde estamos criando o seu anúncio", ephemeral: true });
+        await interaction.deferReply({ ephemeral: true });
       
         const title = interaction.fields.getTextInputValue('titleInput');
-        const value = interaction.fields.getTextInputValue('valueInput');
+        const valorString = interaction.fields.getTextInputValue('valueInput');
         const description = interaction.fields.getTextInputValue('descriptionInput');
         const link = interaction.fields.getTextInputValue('linkInput');
         const data = interaction.fields.getTextInputValue('dataInput');
 
+        const valorRegex = /^[0-9]+([,.][0-9]+)?$/;
+        if (!valorRegex.test(valorString)) {
+          await interaction.editReply({ content: "Insira um valor válido", ephemeral: true });
+          return
+        }
+        
+        const value = Number(valorString.replace(',', '.'));
+        if (isNaN(value)) {
+          await interaction.editReply({ content: "Insira um valor válido", ephemeral: true });
+          return
+        }
+        
         const channel = interaction.channel;
-
         const user_id = interaction.user.id;
         const userAvatar = interaction.user.displayAvatarURL({ format: 'png', dynamic: true, size: 1024 });
         const userDiscordName = interaction.user.tag;
@@ -30,7 +41,7 @@ async function submitAdPremium(interaction) {
           .setThumbnail(userAvatar)
           .setDescription(`${stringMarkdow}${description}${stringMarkdow}`)
           .addFields(
-            { name: 'Valor:', value: value},
+            { name: 'Valor:', value: String(value)},
             { name: 'Anúnciado por:', value: userDiscordName},
             { name: 'Vendido e intermediado por:', value: 'Geometry Marketplace'},
             { name: 'Lembrete:', value: 'Ao comprar através do nosso sistema você garante segurança no recebimento do produto e auxilia na manutenção do servidor!'},
@@ -56,16 +67,17 @@ async function submitAdPremium(interaction) {
         const sentMessage = await channel.send({ embeds: [embed], components: [buttons]});
         const messageId = sentMessage.id;
         await registerAd('6',description,link,data,title,user_id,value, messageId);
+        await interaction.editReply({ content: `Anúncio criado em ${channel}`, ephemeral: true });
 
       }
 
-      interaction.editReply({ content: `Anúncio criado em ${channel}`, ephemeral: true });
+     
 
     }
   } catch (error) {
 
     console.error('Erro:', error);
-    interaction.reply({ content: "Erro", ephemeral: true });
+    interaction.editReply({ content: "Erro ao processar a solicitação criar anúncio Premium", ephemeral: true });
 
   }
 

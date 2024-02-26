@@ -8,13 +8,15 @@ async function submitAd(interaction) {
 
     if (interaction.customId === 'adModal') {
 
+      await interaction.deferReply({ ephemeral: true });
+
       const { adModalOptions } = interaction.client.tempData || {};
       const selectedOption = adModalOptions ? adModalOptions[0] : null;
 
       let id_channel;
       let id_category;
 
-      switch (selectedOption) {
+      switch (selectedOption) { 
         case 'lol_smurf':
           id_channel = '1198197653062811668';
           id_category = 1
@@ -48,14 +50,25 @@ async function submitAd(interaction) {
           id_category = 8
           break;
         }
-
-      interaction.deferReply({ content: "Aguarde estamos criando o seu anúncio", ephemeral: true });
       
+      const valorString = interaction.fields.getTextInputValue('valueInput');
       const title = interaction.fields.getTextInputValue('titleInput');
-      const value = interaction.fields.getTextInputValue('valueInput');
       const description = interaction.fields.getTextInputValue('descriptionInput');
       const link = interaction.fields.getTextInputValue('linkInput');
       const data = interaction.fields.getTextInputValue('dataInput');
+      
+
+      const valorRegex = /^[0-9]+([,.][0-9]+)?$/;
+      if (!valorRegex.test(valorString)) {
+        await interaction.editReply({ content: "Insira um valor válido", ephemeral: true });
+        return
+      }
+      
+      const value = Number(valorString.replace(',', '.'));
+      if (isNaN(value)) {
+        await interaction.editReply({ content: "Insira um valor válido", ephemeral: true });
+        return
+      }
 
       const channel = interaction.guild.channels.cache.get(id_channel);
       const user_id = interaction.user.id;
@@ -63,13 +76,14 @@ async function submitAd(interaction) {
       const userDiscordName = interaction.user.tag;
       const stringMarkdow = "`";
 
+  
       const embed = new Discord.EmbedBuilder()
         .setColor(0x020202)
         .setTitle(`${title}`)
         .setThumbnail(userAvatar)
         .setDescription(`${stringMarkdow}${description}${stringMarkdow}`)
         .addFields(
-          { name: 'Valor:', value: value},
+          { name: 'Valor:', value: String(value)},
           { name: 'Anúnciado por:', value: userDiscordName},
           { name: 'Vendido e intermediado por:', value: 'Geometry Marketplace'},
           { name: 'Lembrete:', value: 'Ao comprar através do nosso sistema você garante segurança no recebimento do produto e auxilia na manutenção do servidor!'},
@@ -95,10 +109,9 @@ async function submitAd(interaction) {
         const sentMessage = await channel.send({ embeds: [embed], components: [buttons]});
         const messageId = sentMessage.id;
         await registerAd(id_category,description,link,data,title,user_id,value, messageId)
+        await interaction.editReply({ content: `Anúncio criado em <#${id_channel}>`, ephemeral: true })
         
       }
-
-      interaction.editReply({ content: `Anúncio criado em <#${id_channel}>`, ephemeral: true })
 
     }
   } catch (error) {
