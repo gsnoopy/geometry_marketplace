@@ -12,7 +12,9 @@ function createAddSaldo(interaction) {
             .setCustomId('valorInput')
             .setLabel("Digite o valor que deseja adicionar.")
             .setStyle(TextInputStyle.Short)
-            .setRequired(true);
+            .setRequired(true)
+            .setMaxLength(6)
+            .setMinLength(1);
 
         const firstActionRow = new ActionRowBuilder().addComponents(valorInput);
 

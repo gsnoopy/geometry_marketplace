@@ -8,10 +8,10 @@ async function seeProfile(interaction) {
 
   if (interaction.customId === 'seeProfile') {
 
+    await interaction.deferReply({ ephemeral: true });
+
     try {
-      
-      await interaction.deferReply({ ephemeral: true });
-    
+          
       const user = await getUserById(interaction.user.id);
       const announcementsData = await getAdByUser(interaction.user.id);
       const saldoRetido = await getSaldoRetido(interaction.user.id);
@@ -26,7 +26,7 @@ async function seeProfile(interaction) {
         const userKey = user.pix;
         const userBalance = user.saldo;
         const userInvitedBy = user.cupom;
-    
+
         const embed = new Discord.EmbedBuilder()
           .setColor(0x020202)
           .setTitle(`Olá ${userDiscordName}, esse é o seu perfil!`)
@@ -38,7 +38,7 @@ async function seeProfile(interaction) {
             { name: '<:mailProfile:1199292107035262996> Email:', value: userEmail},
             { name: '<:pixKey:1199292080145584191> Chave PIX:', value: userKey},
             { name: '<:ProfileSaldo:1199292067734630500> Saldo:', value: userBalance},
-            { name: '<:ProfileSaldo:1199292067734630500> Saldo bloqueado:', value: saldoRetido},
+            { name: '<:ProfileSaldo:1199292067734630500> Saldo bloqueado:', value: String(saldoRetido)},
             { name: '<:cupomProfile:1199292242649690153> Indicado por:', value: userInvitedBy},
           )
           .setTimestamp()

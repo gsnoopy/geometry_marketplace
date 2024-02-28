@@ -32,22 +32,34 @@ async function createSignUp(interaction) {
             const nameInput = new TextInputBuilder()
                 .setCustomId('nameInput')
                 .setLabel("Nome completo")
-                .setStyle(TextInputStyle.Short);
+                .setStyle(TextInputStyle.Short)
+                .setRequired(true)
+                .setMaxLength(30)
+                .setMinLength(7);
 
             const emailInput = new TextInputBuilder()
                 .setCustomId('emailInput')
                 .setLabel("Digite um e-mail válido")
-                .setStyle(TextInputStyle.Short);
+                .setStyle(TextInputStyle.Short)
+                .setRequired(true)
+                .setMaxLength(50)
+                .setMinLength(10);
 
             const pixInput = new TextInputBuilder()
                 .setCustomId('pixInput')
                 .setLabel("Chave PIX")
                 .setStyle(TextInputStyle.Short)
+                .setRequired(true)
+                .setMaxLength(100)
+                .setMinLength(11);
     
             const indicacaoInput = new TextInputBuilder()
                 .setCustomId('indicacaoInput')
                 .setLabel("Cupom de Indicação")
                 .setStyle(TextInputStyle.Short)
+                .setRequired(false)
+                .setMaxLength(15)
+                .setMinLength(0);
 
             const firstActionRow = new ActionRowBuilder().addComponents(nameInput);
             const secondActionRow = new ActionRowBuilder().addComponents(emailInput);

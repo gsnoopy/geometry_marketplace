@@ -18,7 +18,7 @@ async function submitSignUp(interaction,client) {
       const name = interaction.fields.getTextInputValue('nameInput');
       const email = interaction.fields.getTextInputValue('emailInput');
       const pix = interaction.fields.getTextInputValue('pixInput');
-      const cupom = interaction.fields.getTextInputValue('indicacaoInput').toLowerCase();
+      let cupom = interaction.fields.getTextInputValue('indicacaoInput').toLowerCase();
       const userID = interaction.user.id;
       const userRole = process.env.USER_ID;
       let saldo = 0.0;
@@ -35,6 +35,8 @@ async function submitSignUp(interaction,client) {
       if (cupomExists) {
         saldo = 1.0;
         await updateCupomUsages(cupomExists.nome);
+      }else{
+        cupom = '-'
       }
 
       await registerUser(name, userDiscordName, email, pix, userID, saldo, cupom);

@@ -9,9 +9,25 @@ const { registerTransactionSaldo } = require('../../database/create/registerTran
 
 async function submitAddSaldo(interaction) {
 
+  await interaction.deferReply({ephemeral: true})
+
   try {
 
     if (interaction.customId === 'saldoModal') {
+
+      const valorString = interaction.fields.getTextInputValue('valorInput');
+
+      const valorRegex = /^[0-9]+([,.][0-9]+)?$/;
+      if (!valorRegex.test(valorString)) {
+        await interaction.editReply({ content: "Insira um valor válido", ephemeral: true });
+        return
+      }
+      
+      const valor = Number(valorString.replace(',', '.')).toFixed(2);
+      if (isNaN(valor)) {
+        await interaction.editReply({ content: "Insira um valor válido", ephemeral: true });
+        return
+      }
 
       const channelName = `🧌﹒saldo﹒${interaction.user.username}`;
       const category = interaction.guild.channels.cache.get(process.env.TICKET_SALDO) ?? null;
@@ -52,13 +68,10 @@ async function submitAddSaldo(interaction) {
 
       });
       
-      interaction.reply({ 
+      interaction.editReply({ 
         content: `Aguarde estamos criando seu pagamento!`, 
         ephemeral: true 
       });
-
-      const valorString = interaction.fields.getTextInputValue('valorInput');
-      const valor = Number(valorString.replace(',', '.')).toFixed(2);  
 
       const userId = interaction.user.id;
       const usuarioEncontrado = await getUserById(userId);

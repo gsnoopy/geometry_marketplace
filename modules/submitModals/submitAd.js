@@ -109,7 +109,7 @@ async function submitAd(interaction) {
         const sentMessage = await channel.send({ embeds: [embed], components: [buttons]});
         const messageId = sentMessage.id;
         await registerAd(id_category,description,link,data,title,user_id,value, messageId)
-        await interaction.editReply({ content: `Anúncio criado em <#${id_channel}>`, ephemeral: true })
+        await interaction.editReply({ content: `Anúncio criado em <#${channel}>`, ephemeral: true })
         
       }
 

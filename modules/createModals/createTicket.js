@@ -12,7 +12,9 @@ function createTicket(interaction) {
             .setCustomId('questionInput')
             .setLabel("Digite sua dúvida")
             .setStyle(TextInputStyle.Paragraph)
-            .setRequired(false);
+            .setRequired(false)
+            .setMaxLength(200)
+            .setMinLength(20);
 
         const firstActionRow = new ActionRowBuilder().addComponents(questionInput);
 
