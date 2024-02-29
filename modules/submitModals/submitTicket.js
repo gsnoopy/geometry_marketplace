@@ -6,8 +6,6 @@ async function submitTicket(interaction,client) {
 
     if (interaction.customId === 'ticketModal') {
 
-      interaction.deferReply({ephemeral: true }) 
-
       const question = interaction.fields.getTextInputValue('questionInput');
       const channelName = `📩﹒${interaction.user.username}`;
       const categoryChannel = interaction.guild.channels.cache.get(process.env.TICKET_AD) ?? null;
@@ -49,7 +47,7 @@ async function submitTicket(interaction,client) {
       const stringMarkdow = "`";
           
       const embed = new Discord.EmbedBuilder()
-        .setTitle(`Olá <@${interaction.user.id}>`)
+        .setTitle(`Olá ${interaction.user.username}`)
         .setColor(0x004CFF)
         .setDescription(`Sua dúvida: ${stringMarkdow}${question}${stringMarkdow}`)
         .setTimestamp()
@@ -69,7 +67,7 @@ async function submitTicket(interaction,client) {
   } catch (error) {
 
     console.error('Erro ao criar ticket:', error);
-    interaction.reply({ content: "Erro ao criar ticket de suporte.", ephemeral: true });
+    interaction.editReply({ content: "Erro ao criar ticket de suporte.", ephemeral: true });
     
   }
 }

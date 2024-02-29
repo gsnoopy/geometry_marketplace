@@ -35,7 +35,7 @@ async function submitAddSaldo(interaction) {
 
       if (existingChannel) {
 
-        return interaction.reply({ 
+        return interaction.editReply({ 
           content: `Você já possui um ticket aberto em ${existingChannel}!`, 
           ephemeral: true 
         });

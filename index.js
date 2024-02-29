@@ -19,6 +19,7 @@ const { createAd } = require('./modules/createModals/createAd');
 const { createAddSaldo } = require('./modules/createModals/createAddSaldo');
 const { createDeleteAd } = require('./modules/createModals/createDeleteAd');
 const { createTicket } = require('./modules/createModals/createTicket');
+const { createSacarSaldo } = require('./modules/createModals/createSacarSaldo');
 
 const { submitSignUp } = require('./modules/submitModals/submitSignUp');
 const { submitEditProfile } = require('./modules/submitModals/submitEditProfile');
@@ -27,6 +28,7 @@ const { submitAd } = require('./modules/submitModals/submitAd');
 const { submitAdPremium } = require('./modules/submitModals/submitAdPremium');
 const { submitDeleteAd } = require('./modules/submitModals/submitDeleteAd');
 const { submitTicket } = require('./modules/submitModals/submitTicket');
+const { submitSacarSaldo } = require('./modules/submitModals/submitSacarSaldo')
 
 const { seeProfile } = require('./modules/pressButtons/seeProfile');
 const { buyAd } = require('./modules/pressButtons/buyAd'); 
@@ -36,6 +38,8 @@ const { confirmBoost } = require('./modules/pressButtons/confirmBoost');
 const { successSell } = require('./modules/pressButtons/successSell');
 const { deleteTicket } = require('./modules/pressButtons/deleteTicket');
 const { deleteTicketSaldo } = require('./modules/pressButtons/deleteTicketSaldo');
+const { deleteTicketSaque } = require('./modules/pressButtons/deleteTicketSaque');
+
 const { upAd } = require('./modules/pressButtons/upAd');
 
 const { verifyPayment } = require('./scripts/verifyPayment');
@@ -78,6 +82,7 @@ client.on('interactionCreate', (interaction) => {
     createAddSaldo(interaction);
     createDeleteAd(interaction);
     createTicket(interaction);
+    createSacarSaldo(interaction);
     seeProfile(interaction);
     buyAd(interaction, client);
     bePremium(interaction);
@@ -86,6 +91,7 @@ client.on('interactionCreate', (interaction) => {
     successSell(interaction);
     deleteTicket(interaction);
     deleteTicketSaldo(interaction);
+    deleteTicketSaque(interaction);
     upAd(interaction);
 
   }
@@ -99,6 +105,7 @@ client.on('interactionCreate', (interaction) => {
     submitAdPremium(interaction);
     submitDeleteAd(interaction);
     submitTicket(interaction);
+    submitSacarSaldo(interaction);
 
   }
 
