@@ -68,9 +68,9 @@ async function upAd(interaction) {
 
             const sentMessage = await channel.send({ embeds: [embed], components: [buttons]});
             const messageId = sentMessage.id;
-
+            const currentDateTime = new Date().toISOString();
             await channel.messages.delete(existingAd.message_id)
-            await updateAd(existingAd.message_id,messageId)
+            await updateAd(existingAd.message_id,messageId,currentDateTime)
 
           }
 
