@@ -69,3 +69,10 @@ CREATE TABLE premiums (
     user_id VARCHAR(255) PRIMARY KEY,
     data_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE saques (
+    user_id VARCHAR(255) NOT NULL,
+    valor NUMERIC NOT NULL,
+    valor_taxado NUMERIC NOT NULL,
+    data_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
