@@ -27,8 +27,7 @@ module.exports = {
         const userName = user.name;
         const userEmail = user.email;
         const userKey = user.pix;
-        const userSaldo = user.saldo;
-        const userInvitedBy = user.cupom;
+        const userBalance = user.saldo;
 
         const embed = new Discord.EmbedBuilder()
           .setColor(0x020202)
@@ -40,17 +39,26 @@ module.exports = {
             { name: '<:idBadge:1199292190933917696> ID:', value: userId },
             { name: '<:mailProfile:1199292107035262996> Email:', value: userEmail},
             { name: '<:pixKey:1199292080145584191> Chave PIX:', value: userKey},
-            { name: '<:ProfileSaldo:1199292067734630500> Saldo:', value: userSaldo},
+            { name: '<:ProfileSaldo:1199292067734630500> Saldo:', value: userBalance},
             { name: '<:ProfileSaldo:1199292067734630500> Saldo bloqueado:', value: String(saldoRetido)},
-            { name: '<:cupomProfile:1199292242649690153> Indicado por:', value: userInvitedBy},
           )
           .setTimestamp()
 
-        if (announcementsData.length > 0) {
+        if (announcementsData.length > 0 && announcementsData.length < 5) {
 
           const announcementsField = {
             name: 'Anúncios ativos:',
             value: announcementsData.map(ad => `ID: ${ad.message_id} | Title: ${ad.title}`).join('\n'),
+          };
+          embed.addFields(announcementsField);
+
+        }
+
+        if (announcementsData.length > 5) {
+
+          const announcementsField = {
+            name: 'Anúncios ativos:',
+            value: "Você possui muitos anúncios ativos, por favor **utilize o comando /anuncios** para listagem",
           };
           embed.addFields(announcementsField);
 
