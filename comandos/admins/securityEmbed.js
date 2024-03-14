@@ -23,6 +23,10 @@ module.exports = {
             .setLabel('Segurança e uso')
             .setURL(`https://drive.google.com/file/d/1enklfIVOfHpSA65V_mHF66dK3MX3Njy_/view?usp=sharing`)
             .setStyle(Discord.ButtonStyle.Link),
+          new Discord.ButtonBuilder()
+            .setLabel('Termos de uso')
+            .setURL(`https://drive.google.com/file/d/1D0jZ5yAKUXAjigyMPn8KpHZbzWzIkidi/view?usp=sharing`)
+            .setStyle(Discord.ButtonStyle.Link),
       );
         
       interaction.reply({ content: `✅ Mensagem enviada!`, ephemeral: true });

@@ -24,6 +24,10 @@ module.exports = {
             .setLabel("Abrir suporte")
             .setEmoji("<:signUp:1199292028165574767>") 
             .setStyle(Discord.ButtonStyle.Primary),
+          new Discord.ButtonBuilder()
+            .setLabel('Termos de uso')
+            .setURL(`https://drive.google.com/file/d/1D0jZ5yAKUXAjigyMPn8KpHZbzWzIkidi/view?usp=sharing`)
+            .setStyle(Discord.ButtonStyle.Link),
       );
 
       interaction.reply({ content: `✅ Mensagem enviada!`, ephemeral: true });
