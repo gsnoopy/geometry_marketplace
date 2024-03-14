@@ -9,11 +9,9 @@ const { validEmail } = require('../../utils/validEmail');
 
 async function submitSignUp(interaction,client) {
 
+  await interaction.deferReply({ ephemeral: true })
+
   try {
-
-    if (interaction.customId === 'signUpModal') {
-
-      await interaction.deferReply({ ephemeral: true })
       
       const name = interaction.fields.getTextInputValue('nameInput');
       const email = interaction.fields.getTextInputValue('emailInput');
@@ -50,7 +48,6 @@ async function submitSignUp(interaction,client) {
       await createLog(client, '1204475836330287134', embed)
       interaction.editReply({ content: "Usuário cadastrado!", ephemeral: true });
 
-    }
   } catch (error) {
 
     console.error('Erro ao cadastrar usuário:', error);

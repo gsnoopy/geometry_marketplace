@@ -2,9 +2,9 @@ const { Discord } = require('../../imports');
 
 async function submitTicket(interaction,client) {
 
-  try {
+  await interaction.deferReply({ephemeral: true})
 
-    if (interaction.customId === 'ticketModal') {
+  try {
 
       const question = interaction.fields.getTextInputValue('questionInput');
       const channelName = `📩﹒${interaction.user.username}`;
@@ -63,7 +63,6 @@ async function submitTicket(interaction,client) {
       await channel.send(({ embeds: [embed], components: [button]}));
       interaction.editReply({ content: `Ticket criado em <#${channel.id}>!`, ephemeral: true });
 
-    }
   } catch (error) {
 
     console.error('Erro ao criar ticket:', error);

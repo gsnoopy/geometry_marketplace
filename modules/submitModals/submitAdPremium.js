@@ -4,11 +4,9 @@ const { registerAd } = require('../../database/create/registerAd');
 
 async function submitAdPremium(interaction) {
 
+  await interaction.deferReply({ ephemeral: true });
+
   try {
-
-    if (interaction.customId === 'adModalPremium') {
-
-        await interaction.deferReply({ ephemeral: true });
       
         const title = interaction.fields.getTextInputValue('titleInput');
         const valorString = interaction.fields.getTextInputValue('valueInput');
@@ -42,10 +40,7 @@ async function submitAdPremium(interaction) {
           .setDescription(`${stringMarkdow}${description}${stringMarkdow}`)
           .addFields(
             { name: 'Valor:', value: String(value)},
-            { name: 'Anúnciado por:', value: userDiscordName},
-            { name: 'Vendido e intermediado por:', value: 'Geometry Marketplace'},
-            { name: 'Lembrete:', value: 'Ao comprar através do nosso sistema você garante segurança no recebimento do produto e auxilia na manutenção do servidor!'},
-          )
+            { name: 'Anúnciado por:', value: userDiscordName},          )
           .setImage(`${link}`)
           .setTimestamp()
       
@@ -71,13 +66,10 @@ async function submitAdPremium(interaction) {
 
       }
 
-     
-
-    }
   } catch (error) {
 
     console.error('Erro:', error);
-    interaction.editReply({ content: "Erro ao processar a solicitação criar anúncio Premium", ephemeral: true });
+    await interaction.editReply({ content: "Erro ao processar a solicitação criar anúncio Premium", ephemeral: true });
 
   }
 

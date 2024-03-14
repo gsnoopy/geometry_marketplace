@@ -75,38 +75,92 @@ client.on('interactionCreate', (interaction) => {
 
   }
 
-  if(interaction.isButton()){
-
-    createSignUp(interaction);
-    createEditProfile(interaction);
-    createAddSaldo(interaction);
-    createDeleteAd(interaction);
-    createTicket(interaction);
-    createSacarSaldo(interaction);
-    seeProfile(interaction);
-    buyAd(interaction, client);
-    bePremium(interaction);
-    confirmPremium(interaction,client);
-    confirmBoost(interaction, client);
-    successSell(interaction);
-    deleteTicket(interaction);
-    deleteTicketSaldo(interaction);
-    deleteTicketSaque(interaction);
-    upAd(interaction);
-
+  if (interaction.isButton()) {
+    switch (interaction.customId) {
+      case 'ad_options':
+        createAd(interaction);
+        break;
+      case 'signup':
+        createSignUp(interaction);
+        break;
+      case 'editProfile':
+        createEditProfile(interaction);
+        break;
+      case 'comprarSaldo':
+        createAddSaldo(interaction);
+        break;
+      case 'deleteAd':
+        createDeleteAd(interaction);
+        break;
+      case 'ticket':
+        createTicket(interaction);
+        break;
+      case 'sacarSaldo':
+        createSacarSaldo(interaction);
+        break;
+      case 'seeProfile':
+        seeProfile(interaction);
+        break;
+      case 'buyAd':
+        buyAd(interaction, client);
+        break;
+      case 'bePremium':
+        bePremium(interaction);
+        break;
+      case 'confirmPremium':
+        confirmPremium(interaction, client);
+        break;
+      case 'confirmEveryone':
+      case 'confirmHere':
+        confirmBoost(interaction, client);
+        break;
+      case 'successSell':
+        successSell(interaction);
+        break;
+      case 'deleteTicket':
+        deleteTicket(interaction);
+        break;
+      case 'deleteTicketSaldo':
+        deleteTicketSaldo(interaction);
+        break;
+      case 'deleteTicketSaque':
+        deleteTicketSaque(interaction);
+        break;
+      case 'upAd':
+        upAd(interaction);
+        break;
+      default:
+    }
   }
 
-  if (interaction.isModalSubmit()){
-
-    submitSignUp(interaction,client);
-    submitEditProfile(interaction);
-    submitAddSaldo(interaction);
-    submitAd(interaction);
-    submitAdPremium(interaction);
-    submitDeleteAd(interaction);
-    submitTicket(interaction);
-    submitSacarSaldo(interaction);
-
+  if (interaction.isModalSubmit()) {
+    switch (interaction.customId) {
+      case 'signUpModal':
+        submitSignUp(interaction, client);
+        break;
+      case 'editProfileModal':
+        submitEditProfile(interaction);
+        break;
+      case 'saldoModal':
+        submitAddSaldo(interaction);
+        break;
+      case 'adModal':
+        submitAd(interaction);
+        break;
+      case 'adModalPremium':
+        submitAdPremium(interaction);
+        break;
+      case 'deleteAdModal':
+        submitDeleteAd(interaction);
+        break;
+      case 'ticketModal':
+        submitTicket(interaction);
+        break;
+      case 'saqueModal':
+        submitSacarSaldo(interaction);
+        break;
+      default:
+    }
   }
 
     if (interaction.isStringSelectMenu()) {

@@ -5,11 +5,11 @@ const { updateAd } = require('../../database/edit/updateAd');
 
 async function upAd(interaction) {
 
+    await interaction.deferReply({ephemeral: true});
+
   try {
 
-    if (interaction.customId === 'upAd') {
 
-      interaction.deferReply({ephemeral: true});
 
       const userId = interaction.user.id;
       const ad_id = interaction.message.id;
@@ -78,7 +78,7 @@ async function upAd(interaction) {
 
         }
       }
-    }
+    
   } catch (error) {
     
     console.error('Erro na função upAd:', error);

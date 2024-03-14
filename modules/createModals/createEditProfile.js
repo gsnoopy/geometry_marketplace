@@ -1,8 +1,6 @@
 const { ActionRowBuilder, ModalBuilder, TextInputBuilder, TextInputStyle } = require('../../imports');
 
-function createEditProfile(interaction) {
-
-    if (interaction.customId === 'editProfile') {
+function createEditProfile(interaction) { 
 
         const modal = new ModalBuilder()
             .setCustomId('editProfileModal')
@@ -43,7 +41,6 @@ function createEditProfile(interaction) {
 
         interaction.showModal(modal);
         
-    }
 }
   
 module.exports = { createEditProfile };

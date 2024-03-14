@@ -4,11 +4,9 @@ const { deleteAdById } = require('../../database/delete/deleteAdById');
 
 async function submitDeleteAd(interaction) {
 
+  await interaction.deferReply({ ephemeral: true });
+
   try {
-
-    if (interaction.customId === 'deleteAdModal') {
-
-      await interaction.deferReply({ ephemeral: true });
 
       const ad_id = interaction.fields.getTextInputValue('anuncioID');
       const existingAd = await getAdById(ad_id);
@@ -39,7 +37,7 @@ async function submitDeleteAd(interaction) {
         await interaction.editReply({ content: "Você digitou o ID de um anúncio inexistente.", ephemeral: true });
 
       }
-    }
+    
   } catch (error) {
 
     console.error('Erro na solicitação submitDeleteAd', error);

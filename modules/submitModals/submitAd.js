@@ -4,11 +4,9 @@ const { registerAd } = require('../../database/create/registerAd');
 
 async function submitAd(interaction) {
 
+  await interaction.deferReply({ ephemeral: true });
+
   try {
-
-    if (interaction.customId === 'adModal') {
-
-      await interaction.deferReply({ ephemeral: true });
 
       const { adModalOptions } = interaction.client.tempData || {};
       const selectedOption = adModalOptions ? adModalOptions[0] : null;
@@ -85,8 +83,6 @@ async function submitAd(interaction) {
         .addFields(
           { name: 'Valor:', value: String(value)},
           { name: 'Anúnciado por:', value: userDiscordName},
-          { name: 'Vendido e intermediado por:', value: 'Geometry Marketplace'},
-          { name: 'Lembrete:', value: 'Ao comprar através do nosso sistema você garante segurança no recebimento do produto e auxilia na manutenção do servidor!'},
         )
         .setImage(`${link}`)
         .setTimestamp()
@@ -113,11 +109,10 @@ async function submitAd(interaction) {
         
       }
 
-    }
   } catch (error) {
 
     console.error('Erro ao processar a solicitação submitAd', error);
-    interaction.editReply({ content: "Erro ao processar a solicitação criar anúncio", ephemeral: true });
+    await interaction.editReply({ content: "Erro ao processar a solicitação criar anúncio", ephemeral: true });
 
   }
 

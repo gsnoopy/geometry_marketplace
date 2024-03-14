@@ -2,8 +2,6 @@ const { ActionRowBuilder, ModalBuilder, TextInputBuilder, TextInputStyle } = req
 
 function createDeleteAd(interaction) {
 
-    if (interaction.customId === 'deleteAd') {
-        
         const modal = new ModalBuilder()
             .setCustomId('deleteAdModal')
             .setTitle(`Deletando um anúncio`);
@@ -19,8 +17,7 @@ function createDeleteAd(interaction) {
         modal.addComponents(firstActionRow);
 
         interaction.showModal(modal);
-        
-    }
+    
 }
   
 module.exports = { createDeleteAd };

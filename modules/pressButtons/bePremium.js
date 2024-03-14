@@ -3,11 +3,9 @@ const { getUserById } = require('../../database/read/getUserById');
 
 async function bePremium(interaction) {
 
+  await interaction.deferReply({ ephemeral: true });
+
   try {
-
-    if (interaction.customId === 'bePremium') {
-
-      await interaction.deferReply({ ephemeral: true });
 
       const member = interaction.member;
       const premiumRole = process.env.PREMIUM_ID;
@@ -51,7 +49,7 @@ async function bePremium(interaction) {
 
         }
       }
-    }
+    
   } catch (error) {
 
     console.error('Erro na função bePremium:', error);

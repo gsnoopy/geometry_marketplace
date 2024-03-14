@@ -5,20 +5,20 @@ const { getUserById } = require('../../database/read/getUserById');
 
 async function submitSacarSaldo(interaction) {
 
-  try {
+   await interaction.deferReply({ephemeral: true})
 
-    if (interaction.customId == 'saqueModal') {
+  try {
 
       const valorString = interaction.fields.getTextInputValue('valorInput');
 
       const valorRegex = /^[0-9]+([,.][0-9]+)?$/;
       if (!valorRegex.test(valorString)) {
-        return interaction.editReply({ content: "Insira um valor válido", ephemeral: true });
+        return await interaction.editReply({ content: "Insira um valor válido", ephemeral: true });
       }
-      
+        
       const valor = Number(valorString.replace(',', '.')).toFixed(2);
       if (isNaN(valor)) {
-        return interaction.editReply({ content: "Insira um valor válido", ephemeral: true });
+        return await interaction.editReply({ content: "Insira um valor válido", ephemeral: true });
       }
 
       const userId = interaction.user.id;
@@ -26,7 +26,7 @@ async function submitSacarSaldo(interaction) {
       const userSaldo = user.saldo
 
       if(Number(valor) > Number(userSaldo)){
-        return interaction.editReply({ content: "Saldo insuficiente", ephemeral: true });
+        return await interaction.editReply({ content: "Saldo insuficiente", ephemeral: true });
       }
 
       const channelName = `🧌﹒saque﹒${interaction.user.username}`;
@@ -35,7 +35,7 @@ async function submitSacarSaldo(interaction) {
 
       if (existingChannel) {
 
-        return interaction.editReply({ 
+        return await interaction.editReply({ 
           content: `Você já possui um ticket aberto em ${existingChannel}!`, 
           ephemeral: true 
         });
@@ -83,12 +83,10 @@ async function submitSacarSaldo(interaction) {
 
       channel.send({ embeds: [embed], components: [buttons]});
 
-      interaction.editReply({ 
+      await interaction.editReply({ 
         content: `Seu ticket para sacar saldo foi aberto no canal: ${channel}!`, 
         ephemeral: true 
       });
-
-    }
 
   } catch (error) {
 

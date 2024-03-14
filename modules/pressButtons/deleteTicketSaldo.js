@@ -4,11 +4,10 @@ const { deleteTransactionsSaldoById } = require('../../database/delete/deleteTra
 
 async function deleteTicketSaldo(interaction) {
 
-    if (interaction.customId === 'deleteTicketSaldo') {
 
+    await interaction.deferReply({ ephemeral: true });
+    
         try {
-                
-            await interaction.deferReply({ ephemeral: true });
 
             const channel = interaction.channel;
 
@@ -25,7 +24,7 @@ async function deleteTicketSaldo(interaction) {
             await interaction.reply({ content: "Erro ao processar o botão deleteTicketSaldo.", ephemeral: true });
         
         }
-    }
+    
 }
 
 module.exports = { deleteTicketSaldo };

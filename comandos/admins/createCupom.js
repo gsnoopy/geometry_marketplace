@@ -15,18 +15,18 @@ module.exports = {
 ],
   run: async (client,interaction) => {
 
+    await interaction.deferReply({ephemeral: true});
+
     if (!interaction.member.permissions.has(Discord.PermissionFlagsBits.ManageGuild)) {
 
       interaction.reply({ content: `Você não possui permissão para utilzar este comando!`, ephemeral: true });
 
     } else {
 
-      await interaction.deferReply({ephemeral: true});
-
       const nameString = interaction.options.getString("nome");
       await registerCupom(nameString);
 
-      interaction.editReply({content: `Cupom **${nameString}** cadastrado`, ephemeral: true});
+      await interaction.editReply({content: `Cupom **${nameString}** cadastrado`, ephemeral: true});
 
     }
   }

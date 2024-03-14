@@ -2,7 +2,6 @@ const { ActionRowBuilder, ModalBuilder, TextInputBuilder, TextInputStyle } = req
 
 function createSacarSaldo(interaction) {
 
-    if (interaction.customId === 'sacarSaldo') {
 
         const modal = new ModalBuilder()
             .setCustomId('saqueModal')
@@ -22,7 +21,7 @@ function createSacarSaldo(interaction) {
         
         interaction.showModal(modal);
         
-    }
+    
 }
   
 module.exports = { createSacarSaldo };

@@ -2,8 +2,6 @@ const { ActionRowBuilder, ModalBuilder, TextInputBuilder, TextInputStyle } = req
 
 function createTicket(interaction) {
 
-    if (interaction.customId === 'ticket') {
-
         const modal = new ModalBuilder()
             .setCustomId('ticketModal')
             .setTitle(`Formulario para Suporte`);
@@ -22,7 +20,6 @@ function createTicket(interaction) {
 
         interaction.showModal(modal);
         
-    }
 }
   
 module.exports = { createTicket };

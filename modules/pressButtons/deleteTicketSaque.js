@@ -4,12 +4,11 @@ const { transcriptMessages } = require('../../logs/transcriptMessages')
 
 async function deleteTicketSaque(interaction) {
 
-    if (interaction.customId === 'deleteTicketSaque') {
+    await interaction.deferReply({ ephemeral: true });
+
 
         try {
                 
-            await interaction.deferReply({ ephemeral: true });
-
             const channel = interaction.channel;
 
             interaction.editReply({content: "O canal será fechado em 10 segundos!"});
@@ -22,7 +21,7 @@ async function deleteTicketSaque(interaction) {
             await interaction.reply({ content: "Erro ao processar o botão deleteTicketSaque.", ephemeral: true });
         
         }
-    }
+    
 }
 
 module.exports = { deleteTicketSaque };

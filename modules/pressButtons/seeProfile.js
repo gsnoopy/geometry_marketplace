@@ -6,7 +6,6 @@ const { getSaldoRetido } = require("../../database/read/getSaldoRetido");
 
 async function seeProfile(interaction) {
 
-  if (interaction.customId === 'seeProfile') {
 
     await interaction.deferReply({ ephemeral: true });
 
@@ -91,7 +90,7 @@ async function seeProfile(interaction) {
       console.error('Erro ao processar comando "perfil":', error);
       await interaction.reply({ content: "Erro ao processar o comando.", ephemeral: true });
     
-    }
+    
   }
 }
 

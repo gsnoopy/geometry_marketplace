@@ -3,7 +3,6 @@ const { getUserById } = require('../../database/read/getUserById');
 
 async function createSignUp(interaction) {
 
-    if (interaction.customId === 'signup') {
         
         const user = await getUserById(interaction.user.id);
 
@@ -73,7 +72,7 @@ async function createSignUp(interaction) {
 
             interaction.showModal(modal);
 
-        }
+        
     }
 }
   

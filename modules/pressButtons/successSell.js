@@ -4,7 +4,6 @@ const { transcriptMessages } = require('../../logs/transcriptMessages')
 
 async function successSell(interaction) {
 
-    if (interaction.customId === 'successSell') {
 
         if (!interaction.member.permissions.has(Discord.PermissionFlagsBits.ManageGuild)) {
 
@@ -27,7 +26,7 @@ async function successSell(interaction) {
                 await interaction.reply({ content: "Erro ao processar o botão successSell.", ephemeral: true });
         
             }
-        }
+        
     }
 }
 

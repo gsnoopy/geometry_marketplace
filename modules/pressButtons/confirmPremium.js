@@ -10,12 +10,9 @@ const { createLog } = require('../../logs/createLog')
 async function confirmPremium(interaction,client) {
 
   let roolback;
+  await interaction.deferReply({ ephemeral: true });
 
   try {
-
-    if (interaction.customId === 'confirmPremium') {
-
-      await interaction.deferReply({ ephemeral: true });
 
       const user = interaction.user;
       const guild = interaction.guild;
@@ -69,7 +66,6 @@ async function confirmPremium(interaction,client) {
       await createLog(client, '1204475943771574292', embed);
       await interaction.followUp({ content: 'Usuário agora é premium!', ephemeral: true });
 
-    }
   } catch (error) {
 
     console.error('Erro na função confirmPremium:', error);

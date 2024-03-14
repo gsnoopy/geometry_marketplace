@@ -3,8 +3,6 @@ const { getAdByUser } = require("../../database/read/getAdByUser");
 
 async function createAd(interaction) {
 
-    if (interaction.customId === 'ad_options') {
-
         const ads = await getAdByUser(interaction.user.id);
 
         if (ads.length >= 2) {
@@ -64,7 +62,6 @@ async function createAd(interaction) {
 
             interaction.showModal(modal);
             
-        }
     }
 }
   

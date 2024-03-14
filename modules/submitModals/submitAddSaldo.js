@@ -13,8 +13,6 @@ async function submitAddSaldo(interaction) {
 
   try {
 
-    if (interaction.customId === 'saldoModal') {
-
       const valorString = interaction.fields.getTextInputValue('valorInput');
 
       const valorRegex = /^[0-9]+([,.][0-9]+)?$/;
@@ -154,12 +152,11 @@ async function submitAddSaldo(interaction) {
 
       channel.send({ embeds: [embed], components: [buttons], files: [file] })
 
-      interaction.editReply({ 
+      await interaction.editReply({ 
         content: `Seu ticket para adicionar saldo foi aberto no canal: ${channel}!`, 
         ephemeral: true 
       });
 
-    }
   } catch (error) {
 
     console.error('Erro ao processar transação: submitAddSaldo', error);

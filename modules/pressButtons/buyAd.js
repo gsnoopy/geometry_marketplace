@@ -11,11 +11,9 @@ const { createLog } = require('../../logs/createLog');
 
 async function buyAd(interaction, client) {
 
+  await interaction.deferReply({ ephemeral: true });
+
   try {
-
-    if (interaction.customId === 'buyAd') {
-
-      await interaction.deferReply({ ephemeral: true });
 
       const ad_id = interaction.message.id;
       const ad_message = interaction.message;
@@ -137,7 +135,7 @@ async function buyAd(interaction, client) {
 
         }
       }
-    }
+    
   } catch (error) {
 
     console.error('Erro na função buyAd:', error);
