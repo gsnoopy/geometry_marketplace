@@ -1,6 +1,7 @@
 const { Discord, ActionRowBuilder, ModalBuilder, TextInputBuilder, TextInputStyle } = require('../../imports');
 
 const { registerAd } = require('../../database/create/registerAd');
+const { getCategoryByChannel } = require('../../database/read/getCategoryByChannel'); //  
 
 async function submitAdPremium(interaction) {
 
@@ -27,6 +28,7 @@ async function submitAdPremium(interaction) {
         }
         
         const channel = interaction.channel;
+        const channelID = channel.id;
         const user_id = interaction.user.id;
         const userAvatar = interaction.user.displayAvatarURL({ format: 'png', dynamic: true, size: 1024 });
         const userDiscordName = interaction.user.tag;
@@ -61,7 +63,8 @@ async function submitAdPremium(interaction) {
 
         const sentMessage = await channel.send({ embeds: [embed], components: [buttons]});
         const messageId = sentMessage.id;
-        await registerAd('6',description,link,data,title,user_id,value, messageId);
+        const categoryId = await getCategoryByChannel(channelID);
+        await registerAd(categoryId,description,link,data,title,user_id,value, messageId);
         await interaction.editReply({ content: `Anúncio criado em ${channel}`, ephemeral: true });
 
       }

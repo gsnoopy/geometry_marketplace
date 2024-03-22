@@ -5,6 +5,7 @@ const { getUserById } = require('../../database/read/getUserById');
 const { registerPremium } = require('../../database/create/registerPremium');
 const { updateUserSaldo } = require('../../database/edit/updateUserSaldo');
 const { registerSale } = require("../../database/create/registerSale");
+const { createCategory } = require("../../database/create/createCategory")
 const { createLog } = require('../../logs/createLog')
 
 async function confirmPremium(interaction,client) {
@@ -49,12 +50,15 @@ async function confirmPremium(interaction,client) {
         ]
       });
 
+      const channelId = channel.id;
+
       const userDB = await getUserById(user.id);
       const premiumPrice = parseFloat(process.env.PREMIUM_PRICE);
       const updatedSaldo = userDB.saldo - premiumPrice;
       const revenue = (premiumPrice - (premiumPrice * 0.01)).toFixed(2);
 
-      await updateUserSaldo(user.id, updatedSaldo);
+      await updateUserSaldo(user.id, updatedSaldo)
+      await createCategory(channelName,channelId);
       await registerPremium(user.id);
       await registerSale(user.id,'Geometry Marketplace',9,premiumPrice,revenue);
 
