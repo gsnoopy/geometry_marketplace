@@ -45,6 +45,8 @@ const { upAd } = require('./modules/pressButtons/upAd');
 const { verifyPayment } = require('./scripts/verifyPayment');
 const { verifyPremiums } = require('./scripts/verifyPremiums');
 const { verifyAds } = require('./scripts/verifyAds');
+const { verifyMembers } = require('./scripts/verifyMembers');
+
 
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
@@ -60,6 +62,10 @@ client.on("ready", () => {
   setInterval(() => {
     verifyAds(db, client);
   }, 7000);
+
+  setInterval(() => {
+    verifyMembers(client);
+  }, 1000);
 
 });
 
