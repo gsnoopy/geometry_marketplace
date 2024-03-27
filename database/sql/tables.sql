@@ -25,6 +25,7 @@ CREATE TABLE anuncios (
     information TEXT,
     criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     categoria_id INTEGER REFERENCES categorias(id)
+    key VARCHAR(255) NOT NULL
 );
 
 
