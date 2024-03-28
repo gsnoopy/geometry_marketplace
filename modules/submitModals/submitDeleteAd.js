@@ -1,4 +1,5 @@
 const { getAdById } = require('../../database/read/getAdById');
+const { getAdByKey } = require('../../database/read/getAdByKey');
 const { getCategoryById } = require('../../database/read/getCategoryById');
 const { deleteAdById } = require('../../database/delete/deleteAdById');
 
@@ -8,13 +9,14 @@ async function submitDeleteAd(interaction) {
 
   try {
 
-      const ad_id = interaction.fields.getTextInputValue('anuncioID');
-      const existingAd = await getAdById(ad_id);
+      const key = interaction.fields.getTextInputValue('adKey');
+      const existingAd = await getAdByKey(key);
 
       if (existingAd) {
 
         const category_id = existingAd.categoria_id;
         const category = await getCategoryById(category_id);
+        const ad_id = existingAd.message_id
 
         await deleteAdById(ad_id);
 
@@ -34,7 +36,7 @@ async function submitDeleteAd(interaction) {
         }
       } else {
 
-        await interaction.editReply({ content: "Você digitou o ID de um anúncio inexistente.", ephemeral: true });
+        await interaction.editReply({ content: "Você digitou a Key de um anúncio inexistente.", ephemeral: true });
 
       }
     

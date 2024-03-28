@@ -6,13 +6,13 @@ async function checkKeyExistsInDatabase(key) {
   }
   
 async function generateUniqueKey() {
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const characters = '!@#$%&*ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   
     while (true) {
       let key = '';
   
       // Gerar a chave aleatória
-      for (let i = 0; i < 9; i++) {
+      for (let i = 0; i < 10; i++) {
         const randomIndex = Math.floor(Math.random() * characters.length);
         key += characters.charAt(randomIndex);
       }

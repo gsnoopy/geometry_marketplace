@@ -7,8 +7,8 @@ function createDeleteAd(interaction) {
             .setTitle(`Deletando um anúncio`);
   
         const idAnuncio = new TextInputBuilder()
-            .setCustomId('anuncioID')
-            .setLabel("Digite o ID do anúncio")
+            .setCustomId('adKey')
+            .setLabel("Digite a KEY do anúncio")
             .setStyle(TextInputStyle.Short)
             .setRequired(true);
 

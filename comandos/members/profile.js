@@ -48,7 +48,7 @@ module.exports = {
 
           const announcementsField = {
             name: 'Anúncios ativos:',
-            value: announcementsData.map(ad => `ID: ${ad.message_id} | Title: ${ad.title}`).join('\n'),
+            value: announcementsData.map(ad => `**Title:** ${ad.title} | **Key:** ${ad.key} `).join('\n'),
           };
           embed.addFields(announcementsField);
 

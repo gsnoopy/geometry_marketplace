@@ -1,6 +1,7 @@
 const { Discord, ActionRowBuilder, ModalBuilder, TextInputBuilder, TextInputStyle } = require('../../imports');
 
 const { registerAd } = require('../../database/create/registerAd');
+const { generateUniqueKey } = require('../../utils/generateKey');
 
 async function submitAd(interaction) {
 
@@ -102,9 +103,10 @@ async function submitAd(interaction) {
 
       if (channel) {
 
+        const adKey = await generateUniqueKey()
         const sentMessage = await channel.send({ embeds: [embed], components: [buttons]});
         const messageId = sentMessage.id;
-        await registerAd(id_category,description,link,data,title,user_id,value, messageId)
+        await registerAd(id_category,description,link,data,title,user_id,value, messageId, adKey)
         await interaction.editReply({ content: `Anúncio criado em <#${channel}>`, ephemeral: true })
         
       }

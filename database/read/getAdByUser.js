@@ -7,7 +7,7 @@ async function getAdByUser(userId) {
   try {
 
     const selectAdsQuery = `
-      SELECT message_id, title FROM anuncios
+      SELECT message_id, title, key FROM anuncios
       WHERE user_id = $1;
     `;
 
