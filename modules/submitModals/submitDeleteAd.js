@@ -1,4 +1,3 @@
-const { getAdById } = require('../../database/read/getAdById');
 const { getAdByKey } = require('../../database/read/getAdByKey');
 const { getCategoryById } = require('../../database/read/getCategoryById');
 const { deleteAdById } = require('../../database/delete/deleteAdById');
